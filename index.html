@@ -39,7 +39,7 @@ body{
   overflow-x:hidden;
 }
 
-/* Animated background */
+/* Animated Background */
 body:before,
 body:after{
   content:"";
@@ -116,8 +116,12 @@ body:after{
 }
 
 @keyframes logoPulse{
-  0%,100%{box-shadow:0 0 15px rgba(0,255,136,.25)}
-  50%{box-shadow:0 0 30px rgba(0,255,136,.65)}
+  0%,100%{
+    box-shadow:0 0 15px rgba(0,255,136,.25);
+  }
+  50%{
+    box-shadow:0 0 30px rgba(0,255,136,.65);
+  }
 }
 
 .menu-btn{
@@ -138,7 +142,7 @@ body:after{
   transform:rotate(4deg) scale(1.05);
 }
 
-/* Side menu */
+/* Side Menu */
 .side-menu{
   position:fixed;
   top:0;
@@ -236,8 +240,12 @@ body:after{
 }
 
 @keyframes badgePulse{
-  0%,100%{box-shadow:0 0 0 rgba(0,255,136,0)}
-  50%{box-shadow:0 0 25px rgba(0,255,136,.12)}
+  0%,100%{
+    box-shadow:0 0 0 rgba(0,255,136,0);
+  }
+  50%{
+    box-shadow:0 0 25px rgba(0,255,136,.12);
+  }
 }
 
 .hero h1{
@@ -254,8 +262,12 @@ body:after{
 }
 
 @keyframes textGlow{
-  from{text-shadow:0 0 12px rgba(0,255,136,.15)}
-  to{text-shadow:0 0 35px rgba(0,255,136,.55)}
+  from{
+    text-shadow:0 0 12px rgba(0,255,136,.15);
+  }
+  to{
+    text-shadow:0 0 35px rgba(0,255,136,.55);
+  }
 }
 
 .hero p{
@@ -266,7 +278,7 @@ body:after{
   font-size:16px;
 }
 
-/* Floating coins */
+/* Floating Coins */
 .hero-coin{
   position:absolute;
   width:58px;
@@ -320,7 +332,7 @@ body:after{
   padding:20px;
 }
 
-/* Buy card */
+/* Buy Card */
 .buy-card{
   max-width:760px;
   margin:0 auto 70px;
@@ -351,7 +363,9 @@ body:after{
 .buy-card:hover{
   transform:translateY(-5px);
   border-color:rgba(0,255,136,.28);
-  box-shadow:0 30px 90px rgba(0,0,0,.5),0 0 35px rgba(0,255,136,.06);
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.5),
+    0 0 35px rgba(0,255,136,.06);
 }
 
 @keyframes cardIn{
@@ -391,7 +405,9 @@ body:after{
 
 .input:focus{
   border-color:var(--green);
-  box-shadow:0 0 0 4px rgba(0,255,136,.07),0 0 25px rgba(0,255,136,.08);
+  box-shadow:
+    0 0 0 4px rgba(0,255,136,.07),
+    0 0 25px rgba(0,255,136,.08);
 }
 
 .receive-box{
@@ -408,8 +424,12 @@ body:after{
 }
 
 @keyframes receiveGlow{
-  0%,100%{box-shadow:inset 0 0 0 rgba(0,255,136,0)}
-  50%{box-shadow:inset 0 0 25px rgba(0,255,136,.035)}
+  0%,100%{
+    box-shadow:inset 0 0 0 rgba(0,255,136,0);
+  }
+  50%{
+    box-shadow:inset 0 0 25px rgba(0,255,136,.035);
+  }
 }
 
 .receive-value{
@@ -497,14 +517,23 @@ body:after{
   left:-100%;
   width:60%;
   height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.35),
+    transparent
+  );
   transform:skewX(-20deg);
   animation:buttonShine 3s infinite;
 }
 
 @keyframes buttonShine{
-  0%{left:-100%}
-  45%,100%{left:140%}
+  0%{
+    left:-100%;
+  }
+  45%,100%{
+    left:140%;
+  }
 }
 
 .buy-btn:hover{
@@ -533,8 +562,13 @@ body:after{
   animation:featureIn .7s both;
 }
 
-.feature:nth-child(2){animation-delay:.12s}
-.feature:nth-child(3){animation-delay:.24s}
+.feature:nth-child(2){
+  animation-delay:.12s;
+}
+
+.feature:nth-child(3){
+  animation-delay:.24s;
+}
 
 @keyframes featureIn{
   from{
@@ -561,8 +595,12 @@ body:after{
 }
 
 @keyframes iconFloat{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-5px)}
+  0%,100%{
+    transform:translateY(0);
+  }
+  50%{
+    transform:translateY(-5px);
+  }
 }
 
 .feature h3{
@@ -658,8 +696,12 @@ body:after{
 }
 
 @keyframes fadeIn{
-  from{opacity:0}
-  to{opacity:1}
+  from{
+    opacity:0;
+  }
+  to{
+    opacity:1;
+  }
 }
 
 @keyframes modalIn{
@@ -700,6 +742,110 @@ body:after{
   cursor:pointer;
 }
 
+/* Minimum Amount Popup */
+.min-popup-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.78);
+  backdrop-filter:blur(8px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:6000;
+}
+
+.min-popup-overlay.active{
+  display:flex;
+  animation:fadeIn .25s ease;
+}
+
+.min-popup{
+  width:100%;
+  max-width:390px;
+  background:linear-gradient(145deg,#101914,#070c0a);
+  border:1px solid rgba(0,255,136,.28);
+  border-radius:22px;
+  padding:28px 22px;
+  text-align:center;
+  box-shadow:
+    0 25px 90px rgba(0,0,0,.65),
+    0 0 35px rgba(0,255,136,.08);
+  animation:minPopupIn .35s ease;
+}
+
+@keyframes minPopupIn{
+  from{
+    opacity:0;
+    transform:translateY(25px) scale(.9);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+.min-popup-icon{
+  width:62px;
+  height:62px;
+  margin:0 auto 16px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:27px;
+  background:rgba(0,255,136,.08);
+  border:1px solid rgba(0,255,136,.25);
+  color:var(--green);
+  box-shadow:0 0 25px rgba(0,255,136,.12);
+  animation:popupIconPulse 1.8s infinite;
+}
+
+@keyframes popupIconPulse{
+  0%,100%{
+    transform:scale(1);
+    box-shadow:0 0 15px rgba(0,255,136,.08);
+  }
+  50%{
+    transform:scale(1.06);
+    box-shadow:0 0 28px rgba(0,255,136,.2);
+  }
+}
+
+.min-popup h2{
+  font-size:21px;
+  margin-bottom:9px;
+}
+
+.min-popup p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+  margin-bottom:20px;
+}
+
+.min-popup strong{
+  color:var(--green);
+}
+
+.min-popup-btn{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:13px;
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  color:#00170b;
+  font-weight:900;
+  font-size:15px;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.min-popup-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 30px rgba(0,255,136,.2);
+}
+
 /* Toast */
 .toast{
   position:fixed;
@@ -708,7 +854,7 @@ body:after{
   transform:translate(-50%,30px);
   opacity:0;
   pointer-events:none;
-  z-index:5000;
+  z-index:7000;
   padding:13px 18px;
   border-radius:12px;
   background:#0d1712;
@@ -734,6 +880,7 @@ body:after{
 
 /* Mobile */
 @media(max-width:700px){
+
   .header{
     padding:0 15px;
   }
@@ -784,6 +931,7 @@ body:after{
 }
 
 @media(prefers-reduced-motion:reduce){
+
   *,
   *:before,
   *:after{
@@ -791,6 +939,7 @@ body:after{
     animation-iteration-count:1!important;
     scroll-behavior:auto!important;
   }
+
 }
 </style>
 </head>
@@ -798,26 +947,44 @@ body:after{
 <body>
 
 <header class="header">
+
   <div class="logo">
     <div class="logo-icon">₮</div>
     USDTX Pay
   </div>
 
   <button class="menu-btn" onclick="openMenu()">☰</button>
+
 </header>
+
 
 <!-- SIDE MENU -->
 <div class="side-menu" id="sideMenu">
+
   <button class="close-menu" onclick="closeMenu()">×</button>
 
-  <a href="#" onclick="showPage('home');closeMenu();return false;">🏠 Home</a>
-  <a href="#" onclick="showPage('buy');closeMenu();return false;">💳 Buy USDT</a>
-  <a href="#" onclick="showPage('orders');closeMenu();return false;">📦 My Orders</a>
-  <a href="#" onclick="showPage('account');closeMenu();return false;">👤 My Account</a>
-  <a href="#" onclick="openAuth();closeMenu();return false;">🔐 Login / Register</a>
-  
-  
+  <a href="#" onclick="showPage('home');closeMenu();return false;">
+    🏠 Home
+  </a>
+
+  <a href="#" onclick="showPage('buy');closeMenu();return false;">
+    💳 Buy USDT
+  </a>
+
+  <a href="#" onclick="showPage('orders');closeMenu();return false;">
+    📦 My Orders
+  </a>
+
+  <a href="#" onclick="showPage('account');closeMenu();return false;">
+    👤 My Account
+  </a>
+
+  <a href="#" onclick="openAuth();closeMenu();return false;">
+    🔐 Login / Register
+  </a>
+
 </div>
+
 
 <!-- HOME -->
 <section class="page active" id="home">
@@ -846,60 +1013,119 @@ body:after{
       </p>
 
     </div>
+
   </div>
+
 
   <div class="container">
 
     <div class="buy-card" id="buy">
 
-      <div class="section-title">Buy USDT</div>
+      <div class="section-title">
+        Buy USDT
+      </div>
 
-      <label class="label">Enter amount (INR)</label>
+      <label class="label">
+        Enter amount (INR)
+      </label>
 
       <input
         class="input"
         id="amount"
         type="number"
-        min="1"
+        min="1000"
         placeholder="Enter INR amount"
         oninput="calculateUSDT()"
       >
 
+
       <div class="receive-box">
+
         <div>
-          <div class="label">You receive</div>
-          <div class="receive-value" id="receive">0 USDT</div>
+
+          <div class="label">
+            You receive
+          </div>
+
+          <div class="receive-value" id="receive">
+            0 USDT
+          </div>
+
         </div>
 
-        
       </div>
+
 
       <div class="grid">
 
         <div>
-          <div class="option-title">Network</div>
+
+          <div class="option-title">
+            Network
+          </div>
 
           <div class="options">
-            <button class="option active" onclick="selectNetwork(this,'TRC20')">TRC20</button>
-            <button class="option" onclick="selectNetwork(this,'ERC20')">ERC20</button>
-            <button class="option" onclick="selectNetwork(this,'BEP20')">BEP20</button>
+
+            <button
+              class="option active"
+              onclick="selectNetwork(this,'TRC20')"
+            >
+              TRC20
+            </button>
+
+            <button
+              class="option"
+              onclick="selectNetwork(this,'ERC20')"
+            >
+              ERC20
+            </button>
+
+            <button
+              class="option"
+              onclick="selectNetwork(this,'BEP20')"
+            >
+              BEP20
+            </button>
+
           </div>
+
         </div>
 
+
         <div>
-          <div class="option-title">Payment Method</div>
+
+          <div class="option-title">
+            Payment Method
+          </div>
 
           <div class="options">
-            <button class="option active" onclick="selectPayment(this,'UPI')">UPI</button>
-            <button class="option" onclick="selectPayment(this,'Crypto')">Crypto</button>
+
+            <button
+              class="option active"
+              onclick="selectPayment(this,'UPI')"
+            >
+              UPI
+            </button>
+
+            <button
+              class="option"
+              onclick="selectPayment(this,'Crypto')"
+            >
+              Crypto
+            </button>
+
           </div>
+
         </div>
 
       </div>
 
+
       <div class="wallet">
 
-        <label class="label">Your USDT wallet address</label>
+        <label class="label">
+          Your USDT wallet address
+        </label>
 
         <textarea
           class="input"
@@ -909,42 +1135,72 @@ body:after{
 
       </div>
 
+
       <button class="buy-btn" onclick="checkout()">
         Continue to Payment →
       </button>
 
     </div>
 
+
     <div class="features">
 
       <div class="feature">
-        <div class="feature-icon">⚡</div>
-        <h3>Fast Processing</h3>
+
+        <div class="feature-icon">
+          ⚡
+        </div>
+
+        <h3>
+          Fast Processing
+        </h3>
+
         <p>
           Simple purchase process designed for quick payment verification.
         </p>
+
       </div>
 
+
       <div class="feature">
-        <div class="feature-icon">🔐</div>
-        <h3>Secure</h3>
+
+        <div class="feature-icon">
+          🔐
+        </div>
+
+        <h3>
+          Secure
+        </h3>
+
         <p>
           Your wallet address and order details are handled securely.
         </p>
+
       </div>
 
+
       <div class="feature">
-        <div class="feature-icon">🌐</div>
-        <h3>Multiple Networks</h3>
+
+        <div class="feature-icon">
+          🌐
+        </div>
+
+        <h3>
+          Multiple Networks
+        </h3>
+
         <p>
           Choose between TRC20, ERC20 and BEP20 according to your needs.
         </p>
+
       </div>
 
     </div>
 
   </div>
+
 </section>
+
 
 <!-- BUY PAGE -->
 <section class="page" id="buyPage">
@@ -953,7 +1209,9 @@ body:after{
 
     <div class="panel">
 
-      <h2 style="margin-bottom:10px;">Buy USDT</h2>
+      <h2 style="margin-bottom:10px;">
+        Buy USDT
+      </h2>
 
       <p style="color:var(--muted);margin-bottom:20px;">
         Select your amount and payment method.
@@ -972,6 +1230,7 @@ body:after{
 
 </section>
 
+
 <!-- ORDERS -->
 <section class="page" id="orders">
 
@@ -979,7 +1238,9 @@ body:after{
 
     <div class="panel">
 
-      <h2 style="margin-bottom:20px;">My Orders</h2>
+      <h2 style="margin-bottom:20px;">
+        My Orders
+      </h2>
 
       <div id="ordersList"></div>
 
@@ -989,6 +1250,7 @@ body:after{
 
 </section>
 
+
 <!-- ACCOUNT -->
 <section class="page" id="account">
 
@@ -996,9 +1258,14 @@ body:after{
 
     <div class="panel">
 
-      <h2 style="margin-bottom:10px;">My Account</h2>
+      <h2 style="margin-bottom:10px;">
+        My Account
+      </h2>
 
-      <p id="accountInfo" style="color:var(--muted);">
+      <p
+        id="accountInfo"
+        style="color:var(--muted);"
+      >
         You are not logged in.
       </p>
 
@@ -1017,39 +1284,75 @@ body:after{
 </section>
 
 
-
 <!-- AUTH MODAL -->
 <div class="overlay" id="authModal">
 
   <div class="modal">
 
-    <h2 id="authTitle">Login</h2>
+    <h2 id="authTitle">
+      Login
+    </h2>
 
     <div class="modal-row">
-      <label class="label">Username</label>
-      <input class="input" id="authUser" placeholder="Username">
+
+      <label class="label">
+        Username
+      </label>
+
+      <input
+        class="input"
+        id="authUser"
+        placeholder="Username"
+      >
+
     </div>
 
+
     <div class="modal-row">
-      <label class="label">Password</label>
-      <input class="input" id="authPass" type="password" placeholder="Password">
+
+      <label class="label">
+        Password
+      </label>
+
+      <input
+        class="input"
+        id="authPass"
+        type="password"
+        placeholder="Password"
+      >
+
     </div>
+
 
     <div class="modal-actions">
 
-      <button class="buy-btn" style="margin-top:0;" onclick="loginUser()">
+      <button
+        class="buy-btn"
+        style="margin-top:0;"
+        onclick="loginUser()"
+      >
         Login
       </button>
 
-      <button class="secondary-btn" onclick="closeAuth()">
+      <button
+        class="secondary-btn"
+        onclick="closeAuth()"
+      >
         Close
       </button>
 
     </div>
 
+
     <button
       onclick="registerUser()"
-      style="background:none;border:0;color:var(--green);margin-top:18px;cursor:pointer;"
+      style="
+        background:none;
+        border:0;
+        color:var(--green);
+        margin-top:18px;
+        cursor:pointer;
+      "
     >
       Create new account
     </button>
@@ -1058,40 +1361,83 @@ body:after{
 
 </div>
 
+
 <!-- CHECKOUT MODAL -->
 <div class="overlay" id="checkoutModal">
 
   <div class="modal">
 
-    <h2>Confirm Order</h2>
+    <h2>
+      Confirm Order
+    </h2>
+
 
     <div class="modal-row">
-      <div class="label">Amount</div>
-      <strong id="checkoutAmount">₹0</strong>
+
+      <div class="label">
+        Amount
+      </div>
+
+      <strong id="checkoutAmount">
+        ₹0
+      </strong>
+
     </div>
 
-    <div class="modal-row">
-      <div class="label">USDT</div>
-      <strong id="checkoutUSDT">0 USDT</strong>
-    </div>
 
     <div class="modal-row">
-      <div class="label">Network</div>
-      <strong id="checkoutNetwork">TRC20</strong>
+
+      <div class="label">
+        USDT
+      </div>
+
+      <strong id="checkoutUSDT">
+        0 USDT
+      </strong>
+
     </div>
 
+
     <div class="modal-row">
-      <div class="label">Payment</div>
-      <strong id="checkoutPayment">UPI</strong>
+
+      <div class="label">
+        Network
+      </div>
+
+      <strong id="checkoutNetwork">
+        TRC20
+      </strong>
+
     </div>
+
+
+    <div class="modal-row">
+
+      <div class="label">
+        Payment
+      </div>
+
+      <strong id="checkoutPayment">
+        UPI
+      </strong>
+
+    </div>
+
 
     <div class="modal-actions">
 
-      <button class="buy-btn" style="margin-top:0;" onclick="placeOrder()">
+      <button
+        class="buy-btn"
+        style="margin-top:0;"
+        onclick="placeOrder()"
+      >
         I Have Paid
       </button>
 
-      <button class="secondary-btn" onclick="closeCheckout()">
+      <button
+        class="secondary-btn"
+        onclick="closeCheckout()"
+      >
         Cancel
       </button>
 
@@ -1101,14 +1447,55 @@ body:after{
 
 </div>
 
+
+<!-- MINIMUM AMOUNT POPUP -->
+<div
+  class="min-popup-overlay"
+  id="minAmountPopup"
+>
+
+  <div class="min-popup">
+
+    <div class="min-popup-icon">
+      ₮
+    </div>
+
+    <h2>
+      Minimum Amount Required
+    </h2>
+
+    <p>
+      The minimum purchase amount is
+      <strong>₹1000</strong>.
+      Please enter ₹1000 or more to continue.
+    </p>
+
+    <button
+      class="min-popup-btn"
+      onclick="closeMinPopup()"
+    >
+      Okay, Got It
+    </button>
+
+  </div>
+
+</div>
+
+
 <!-- TOAST -->
-<div class="toast" id="toast"></div>
+<div
+  class="toast"
+  id="toast"
+></div>
+
 
 <footer class="footer">
   © 2026 USDTX Pay — Secure Digital Payment Platform
 </footer>
 
+
 <script>
+
 /* =========================
    CONFIG
 ========================= */
@@ -1122,45 +1509,85 @@ const USERS_KEY = "usdtx_users";
 const CURRENT_USER_KEY = "usdtx_current_user";
 const ORDERS_KEY = "usdtx_orders";
 
+
 /* =========================
    HELPERS
 ========================= */
 
 function getUsers(){
+
   try{
-    return JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+
+    return JSON.parse(
+      localStorage.getItem(USERS_KEY)
+    ) || [];
+
   }catch(e){
+
     return [];
+
   }
+
 }
+
 
 function getOrders(){
+
   try{
-    return JSON.parse(localStorage.getItem(ORDERS_KEY)) || [];
+
+    return JSON.parse(
+      localStorage.getItem(ORDERS_KEY)
+    ) || [];
+
   }catch(e){
+
     return [];
+
   }
+
 }
+
 
 function saveOrders(orders){
-  localStorage.setItem(ORDERS_KEY,JSON.stringify(orders));
+
+  localStorage.setItem(
+    ORDERS_KEY,
+    JSON.stringify(orders)
+  );
+
 }
 
+
 function getCurrentUser(){
-  return localStorage.getItem(CURRENT_USER_KEY) || "";
+
+  return localStorage.getItem(
+    CURRENT_USER_KEY
+  ) || "";
+
 }
+
 
 /* =========================
    MENU
 ========================= */
 
 function openMenu(){
-  document.getElementById("sideMenu").classList.add("active");
+
+  document
+    .getElementById("sideMenu")
+    .classList.add("active");
+
 }
 
+
 function closeMenu(){
-  document.getElementById("sideMenu").classList.remove("active");
+
+  document
+    .getElementById("sideMenu")
+    .classList.remove("active");
+
 }
+
 
 /* =========================
    PAGE
@@ -1168,41 +1595,67 @@ function closeMenu(){
 
 function showPage(page){
 
-  document.querySelectorAll(".page").forEach(function(p){
-    p.classList.remove("active");
-  });
+  document
+    .querySelectorAll(".page")
+    .forEach(function(p){
+
+      p.classList.remove("active");
+
+    });
+
 
   if(page === "home"){
-    document.getElementById("home").classList.add("active");
+
+    document
+      .getElementById("home")
+      .classList.add("active");
+
   }
+
 
   if(page === "buy"){
-    document.getElementById("home").classList.add("active");
+
+    document
+      .getElementById("home")
+      .classList.add("active");
 
     setTimeout(function(){
-      document.getElementById("buy").scrollIntoView({
-        behavior:"smooth",
-        block:"center"
-      });
+
+      document
+        .getElementById("buy")
+        .scrollIntoView({
+          behavior:"smooth",
+          block:"center"
+        });
+
     },50);
+
   }
+
 
   if(page === "orders"){
-    document.getElementById("orders").classList.add("active");
+
+    document
+      .getElementById("orders")
+      .classList.add("active");
+
     renderOrders();
+
   }
+
 
   if(page === "account"){
-    document.getElementById("account").classList.add("active");
-    updateAccount();
-  }
 
-  if(page === "admin"){
-    document.getElementById("adminPage").classList.add("active");
-    renderAdmin();
+    document
+      .getElementById("account")
+      .classList.add("active");
+
+    updateAccount();
+
   }
 
 }
+
 
 /* =========================
    CALCULATOR
@@ -1210,22 +1663,19 @@ function showPage(page){
 
 function calculateUSDT(){
 
-  const amount = parseFloat(
-    document.getElementById("amount").value
-  ) || 0;
+  const amount =
+    parseFloat(
+      document.getElementById("amount").value
+    ) || 0;
 
-  const usdt = amount / USDT_RATE;
+  const usdt =
+    amount / USDT_RATE;
 
   document.getElementById("receive").textContent =
     usdt.toFixed(2) + " USDT";
 
 }
 
-function syncRateDisplay(){
-  calculateUSDT();
-}
-
-document.getElementById("rate").textContent = USDT_RATE;
 
 /* =========================
    OPTIONS
@@ -1238,11 +1688,15 @@ function selectNetwork(button,network){
   button.parentElement
     .querySelectorAll(".option")
     .forEach(function(btn){
+
       btn.classList.remove("active");
+
     });
 
   button.classList.add("active");
+
 }
+
 
 function selectPayment(button,payment){
 
@@ -1251,11 +1705,15 @@ function selectPayment(button,payment){
   button.parentElement
     .querySelectorAll(".option")
     .forEach(function(btn){
+
       btn.classList.remove("active");
+
     });
 
   button.classList.add("active");
+
 }
+
 
 /* =========================
    TOAST
@@ -1265,18 +1723,36 @@ let toastTimer;
 
 function toast(message){
 
-  const el = document.getElementById("toast");
+  const el =
+    document.getElementById("toast");
 
   el.textContent = message;
+
   el.classList.add("show");
 
   clearTimeout(toastTimer);
 
   toastTimer = setTimeout(function(){
+
     el.classList.remove("show");
+
   },2800);
 
 }
+
+
+/* =========================
+   MINIMUM AMOUNT POPUP
+========================= */
+
+function closeMinPopup(){
+
+  document
+    .getElementById("minAmountPopup")
+    .classList.remove("active");
+
+}
+
 
 /* =========================
    CHECKOUT
@@ -1285,44 +1761,90 @@ function toast(message){
 function checkout(){
 
   const amount =
-    parseFloat(document.getElementById("amount").value) || 0;
+    parseFloat(
+      document.getElementById("amount").value
+    ) || 0;
 
   const wallet =
-    document.getElementById("wallet").value.trim();
+    document
+      .getElementById("wallet")
+      .value
+      .trim();
+
 
   if(amount <= 0){
+
     toast("Please enter a valid amount.");
+
     return;
+
   }
+
+
+  /* Minimum ₹1000 */
+  if(amount < 1000){
+
+    document
+      .getElementById("minAmountPopup")
+      .classList.add("active");
+
+    return;
+
+  }
+
 
   if(!wallet){
+
     toast("Please enter your wallet address.");
+
     return;
+
   }
 
-  const usdt = amount / USDT_RATE;
 
-  document.getElementById("checkoutAmount").textContent =
+  const usdt =
+    amount / USDT_RATE;
+
+
+  document
+    .getElementById("checkoutAmount")
+    .textContent =
     "₹" + amount.toFixed(2);
 
-  document.getElementById("checkoutUSDT").textContent =
+
+  document
+    .getElementById("checkoutUSDT")
+    .textContent =
     usdt.toFixed(2) + " USDT";
 
-  document.getElementById("checkoutNetwork").textContent =
+
+  document
+    .getElementById("checkoutNetwork")
+    .textContent =
     selectedNetwork;
 
-  document.getElementById("checkoutPayment").textContent =
+
+  document
+    .getElementById("checkoutPayment")
+    .textContent =
     selectedPayment;
 
-  document.getElementById("checkoutModal")
+
+  document
+    .getElementById("checkoutModal")
     .classList.add("active");
 
 }
 
+
 function closeCheckout(){
-  document.getElementById("checkoutModal")
+
+  document
+    .getElementById("checkoutModal")
     .classList.remove("active");
+
 }
+
 
 /* =========================
    PLACE ORDER
@@ -1331,34 +1853,50 @@ function closeCheckout(){
 function placeOrder(){
 
   const amount =
-    parseFloat(document.getElementById("amount").value) || 0;
+    parseFloat(
+      document.getElementById("amount").value
+    ) || 0;
 
   const wallet =
-    document.getElementById("wallet").value.trim();
+    document
+      .getElementById("wallet")
+      .value
+      .trim();
 
-  const orders = getOrders();
+
+  const orders =
+    getOrders();
+
 
   const order = {
 
     id:"USDT-" + Date.now(),
 
-    username:getCurrentUser() || "Guest",
+    username:
+      getCurrentUser() || "Guest",
 
     amount:amount,
 
-    usdt:(amount / USDT_RATE).toFixed(2),
+    usdt:
+      (amount / USDT_RATE).toFixed(2),
 
-    network:selectedNetwork,
+    network:
+      selectedNetwork,
 
-    payment:selectedPayment,
+    payment:
+      selectedPayment,
 
-    wallet:wallet,
+    wallet:
+      wallet,
 
-    status:"Pending",
+    status:
+      "Pending",
 
-    created:new Date().toLocaleString()
+    created:
+      new Date().toLocaleString()
 
   };
+
 
   orders.unshift(order);
 
@@ -1366,109 +1904,178 @@ function placeOrder(){
 
   closeCheckout();
 
-  toast("Order created. Payment verification pending.");
+  toast(
+    "Order created. Payment verification pending."
+  );
+
 
   setTimeout(function(){
+
     showPage("orders");
+
   },700);
 
 }
+
 
 /* =========================
    AUTH
 ========================= */
 
 function openAuth(){
-  document.getElementById("authModal")
+
+  document
+    .getElementById("authModal")
     .classList.add("active");
+
 }
 
+
 function closeAuth(){
-  document.getElementById("authModal")
+
+  document
+    .getElementById("authModal")
     .classList.remove("active");
+
 }
+
 
 function registerUser(){
 
   const username =
-    document.getElementById("authUser").value.trim();
+    document
+      .getElementById("authUser")
+      .value
+      .trim();
 
   const password =
-    document.getElementById("authPass").value;
+    document
+      .getElementById("authPass")
+      .value;
+
 
   if(!username || !password){
-    toast("Enter username and password.");
+
+    toast(
+      "Enter username and password."
+    );
+
     return;
+
   }
 
-  const users = getUsers();
 
-  const exists = users.some(function(user){
-    return user.username === username;
-  });
+  const users =
+    getUsers();
+
+
+  const exists =
+    users.some(function(user){
+
+      return user.username === username;
+
+    });
+
 
   if(exists){
-    toast("Username already exists.");
+
+    toast(
+      "Username already exists."
+    );
+
     return;
+
   }
 
+
   users.push({
-    username:username,
-    password:password
+
+    username:
+      username,
+
+    password:
+      password
+
   });
+
 
   localStorage.setItem(
     USERS_KEY,
     JSON.stringify(users)
   );
 
+
   localStorage.setItem(
     CURRENT_USER_KEY,
     username
   );
 
+
   closeAuth();
 
-  toast("Account created successfully.");
+  toast(
+    "Account created successfully."
+  );
 
   updateAccount();
 
 }
+
 
 function loginUser(){
 
   const username =
-    document.getElementById("authUser").value.trim();
+    document
+      .getElementById("authUser")
+      .value
+      .trim();
 
   const password =
-    document.getElementById("authPass").value;
+    document
+      .getElementById("authPass")
+      .value;
 
-  const users = getUsers();
 
-  const user = users.find(function(u){
-    return u.username === username &&
-           u.password === password;
-  });
+  const users =
+    getUsers();
+
+
+  const user =
+    users.find(function(u){
+
+      return u.username === username &&
+             u.password === password;
+
+    });
+
 
   if(!user){
 
-    toast("Invalid username or password.");
+    toast(
+      "Invalid username or password."
+    );
 
     return;
+
   }
+
 
   localStorage.setItem(
     CURRENT_USER_KEY,
     username
   );
 
+
   closeAuth();
 
-  toast("Login successful.");
+  toast(
+    "Login successful."
+  );
 
   updateAccount();
 
 }
+
 
 /* =========================
    ACCOUNT
@@ -1476,9 +2083,14 @@ function loginUser(){
 
 function updateAccount(){
 
-  const username = getCurrentUser();
+  const username =
+    getCurrentUser();
 
-  const el = document.getElementById("accountInfo");
+  const el =
+    document.getElementById(
+      "accountInfo"
+    );
+
 
   if(username){
 
@@ -1496,6 +2108,7 @@ function updateAccount(){
 
 }
 
+
 /* =========================
    ORDERS
 ========================= */
@@ -1503,9 +2116,13 @@ function updateAccount(){
 function renderOrders(){
 
   const container =
-    document.getElementById("ordersList");
+    document.getElementById(
+      "ordersList"
+    );
 
-  const orders = getOrders();
+  const orders =
+    getOrders();
+
 
   if(!orders.length){
 
@@ -1513,19 +2130,27 @@ function renderOrders(){
       "<p style='color:var(--muted)'>No orders yet.</p>";
 
     return;
+
   }
+
 
   container.innerHTML = "";
 
+
   orders.forEach(function(order){
 
-    const div = document.createElement("div");
+    const div =
+      document.createElement("div");
 
-    div.className = "order";
+    div.className =
+      "order";
+
 
     div.innerHTML =
 
-      "<strong>" + order.id + "</strong>" +
+      "<strong>" +
+      order.id +
+      "</strong>" +
 
       "<br><span style='color:var(--muted)'>" +
       order.created +
@@ -1533,25 +2158,31 @@ function renderOrders(){
 
       "<br><br>" +
 
-      "Amount: ₹" + Number(order.amount).toFixed(2) +
+      "Amount: ₹" +
+      Number(order.amount).toFixed(2) +
 
       "<br>" +
 
-      "Receive: " + order.usdt + " USDT" +
+      "Receive: " +
+      order.usdt +
+      " USDT" +
 
       "<br>" +
 
-      "Network: " + order.network +
+      "Network: " +
+      order.network +
 
       "<br>" +
 
-      "Payment: " + order.payment +
+      "Payment: " +
+      order.payment +
 
       "<br>" +
 
       "<span class='status'>" +
       order.status +
       "</span>";
+
 
     container.appendChild(div);
 
@@ -1560,28 +2191,54 @@ function renderOrders(){
 }
 
 
-
 /* =========================
    MODAL CLICK OUTSIDE
 ========================= */
 
-document.querySelectorAll(".overlay").forEach(function(overlay){
+document
+  .querySelectorAll(".overlay")
+  .forEach(function(overlay){
 
-  overlay.addEventListener("click",function(e){
+    overlay.addEventListener(
+      "click",
+      function(e){
 
-    if(e.target === overlay){
-      overlay.classList.remove("active");
-    }
+        if(e.target === overlay){
+
+          overlay.classList.remove(
+            "active"
+          );
+
+        }
+
+      }
+    );
 
   });
 
-});
+
+/* Minimum popup outside click */
+document
+  .getElementById("minAmountPopup")
+  .addEventListener(
+    "click",
+    function(e){
+
+      if(e.target === this){
+
+        closeMinPopup();
+
+      }
+
+    }
+  );
+
 
 /* =========================
    INITIALIZE
 ========================= */
 
-syncRateDisplay();
+calculateUSDT();
 updateAccount();
 
 </script>
