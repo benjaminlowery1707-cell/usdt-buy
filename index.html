@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>USDTX — Buy USDT</title>
+<title>TetherFlow — Buy USDT</title>
 
 <style>
 *{
@@ -82,6 +82,12 @@ header{
     justify-content:center;
     font-weight:1000;
     box-shadow:0 0 25px rgba(0,255,136,.35);
+}
+
+.logo-icon svg{
+    width:25px;
+    height:25px;
+    display:block;
 }
 
 .header-right{
@@ -766,13 +772,19 @@ footer{
 <!-- HEADER -->
 <header>
     <div class="logo">
-        <div class="logo-icon">₮</div>
-        USDTX
+        <div class="logo-icon" aria-label="USDT Tether logo">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+                <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="4"/>
+                <path d="M15 18h34v8H39v21h-7V26h-7v21h-7V26h-3z" fill="currentColor"/>
+                <rect x="13" y="15" width="38" height="7" rx="2" fill="currentColor"/>
+            </svg>
+        </div>
+        TetherFlow
     </div>
 
     <div class="header-right">
         <div class="balance-mini">
-            Rate: <b>₹5 / USDT</b>
+            Rate: <b id="headerRate">₹5 / USDT</b>
         </div>
 
         <button class="menu-btn" onclick="openMenu()">☰</button>
@@ -785,7 +797,7 @@ footer{
 <div class="side-menu" id="sideMenu">
 
     <div class="menu-top">
-        <h3>USDTX</h3>
+        <h3>TetherFlow</h3>
         <button class="close-menu" onclick="closeMenu()">×</button>
     </div>
 
@@ -908,7 +920,7 @@ footer{
                 <div>
                     <small>You Receive</small>
                     <div class="result-usdt" id="receiveText">
-                        200 USDT
+                        10 USDT
                     </div>
                 </div>
 
@@ -1077,7 +1089,7 @@ footer{
 </main>
 
 <footer>
-    © 2026 USDTX — Digital Asset Purchase Platform
+    © 2026 TetherFlow — Digital Asset Purchase Platform
 </footer>
 
 
@@ -1325,6 +1337,11 @@ footer{
 ========================= */
 
 const USDT_RATE = 5;
+
+function syncRateDisplay(){
+    const headerRate = document.getElementById("headerRate");
+    if(headerRate) headerRate.innerText = `₹${USDT_RATE} / USDT`;
+}
 
 
 /* =========================
@@ -1660,7 +1677,7 @@ function updateMenu(){
 
         menuUser.innerHTML = `
             <small>Guest</small>
-            <strong>Welcome to USDTX</strong>
+            <strong>Welcome to TetherFlow</strong>
         `;
     }
 }
@@ -2055,6 +2072,7 @@ function escapeHTML(value){
    INITIALIZE
 ========================= */
 
+syncRateDisplay();
 calculateUSDT();
 updateMenu();
 
