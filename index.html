@@ -39,7 +39,6 @@ body{
   overflow-x:hidden;
 }
 
-/* Animated Background */
 body:before,
 body:after{
   content:"";
@@ -77,7 +76,7 @@ body:after{
   to{transform:translate(-120px,-70px)}
 }
 
-/* Header */
+/* HEADER */
 .header{
   height:72px;
   position:sticky;
@@ -98,7 +97,6 @@ body:after{
   gap:10px;
   font-size:21px;
   font-weight:800;
-  letter-spacing:.3px;
 }
 
 .logo-icon{
@@ -116,12 +114,8 @@ body:after{
 }
 
 @keyframes logoPulse{
-  0%,100%{
-    box-shadow:0 0 15px rgba(0,255,136,.25);
-  }
-  50%{
-    box-shadow:0 0 30px rgba(0,255,136,.65);
-  }
+  0%,100%{box-shadow:0 0 15px rgba(0,255,136,.25)}
+  50%{box-shadow:0 0 30px rgba(0,255,136,.65)}
 }
 
 .menu-btn{
@@ -142,7 +136,7 @@ body:after{
   transform:rotate(4deg) scale(1.05);
 }
 
-/* Side Menu */
+/* SIDE MENU */
 .side-menu{
   position:fixed;
   top:0;
@@ -192,7 +186,7 @@ body:after{
   transform:translateX(-5px);
 }
 
-/* Hero */
+/* HERO */
 .hero{
   position:relative;
   max-width:1150px;
@@ -240,12 +234,8 @@ body:after{
 }
 
 @keyframes badgePulse{
-  0%,100%{
-    box-shadow:0 0 0 rgba(0,255,136,0);
-  }
-  50%{
-    box-shadow:0 0 25px rgba(0,255,136,.12);
-  }
+  0%,100%{box-shadow:0 0 0 rgba(0,255,136,0)}
+  50%{box-shadow:0 0 25px rgba(0,255,136,.12)}
 }
 
 .hero h1{
@@ -262,12 +252,8 @@ body:after{
 }
 
 @keyframes textGlow{
-  from{
-    text-shadow:0 0 12px rgba(0,255,136,.15);
-  }
-  to{
-    text-shadow:0 0 35px rgba(0,255,136,.55);
-  }
+  from{text-shadow:0 0 12px rgba(0,255,136,.15)}
+  to{text-shadow:0 0 35px rgba(0,255,136,.55)}
 }
 
 .hero p{
@@ -278,7 +264,7 @@ body:after{
   font-size:16px;
 }
 
-/* Floating Coins */
+/* FLOATING COINS */
 .hero-coin{
   position:absolute;
   width:58px;
@@ -325,14 +311,14 @@ body:after{
   }
 }
 
-/* Main */
+/* MAIN */
 .container{
   max-width:1100px;
   margin:auto;
   padding:20px;
 }
 
-/* Buy Card */
+/* BUY CARD */
 .buy-card{
   max-width:760px;
   margin:0 auto 70px;
@@ -438,7 +424,7 @@ body:after{
   color:var(--green);
 }
 
-/* Grid */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -528,12 +514,8 @@ body:after{
 }
 
 @keyframes buttonShine{
-  0%{
-    left:-100%;
-  }
-  45%,100%{
-    left:140%;
-  }
+  0%{left:-100%}
+  45%,100%{left:140%}
 }
 
 .buy-btn:hover{
@@ -545,7 +527,7 @@ body:after{
   transform:translateY(0) scale(.99);
 }
 
-/* Features */
+/* FEATURES */
 .features{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -595,12 +577,8 @@ body:after{
 }
 
 @keyframes iconFloat{
-  0%,100%{
-    transform:translateY(0);
-  }
-  50%{
-    transform:translateY(-5px);
-  }
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-5px)}
 }
 
 .feature h3{
@@ -613,7 +591,7 @@ body:after{
   line-height:1.6;
 }
 
-/* Pages */
+/* PAGES */
 .page{
   display:none;
   animation:pageIn .35s ease;
@@ -634,7 +612,7 @@ body:after{
   }
 }
 
-/* Account / Orders */
+/* PANELS */
 .panel{
   max-width:800px;
   margin:45px auto;
@@ -666,7 +644,7 @@ body:after{
   color:#ffd15c;
 }
 
-/* Modal */
+/* MODALS */
 .overlay{
   position:fixed;
   inset:0;
@@ -696,12 +674,8 @@ body:after{
 }
 
 @keyframes fadeIn{
-  from{
-    opacity:0;
-  }
-  to{
-    opacity:1;
-  }
+  from{opacity:0}
+  to{opacity:1}
 }
 
 @keyframes modalIn{
@@ -742,7 +716,7 @@ body:after{
   cursor:pointer;
 }
 
-/* Minimum Amount Popup */
+/* MINIMUM POPUP */
 .min-popup-overlay{
   position:fixed;
   inset:0;
@@ -846,7 +820,7 @@ body:after{
   box-shadow:0 10px 30px rgba(0,255,136,.2);
 }
 
-/* Toast */
+/* TOAST */
 .toast{
   position:fixed;
   bottom:25px;
@@ -869,7 +843,7 @@ body:after{
   transform:translate(-50%,0);
 }
 
-/* Footer */
+/* FOOTER */
 .footer{
   text-align:center;
   padding:30px 20px;
@@ -878,7 +852,7 @@ body:after{
   border-top:1px solid rgba(0,255,136,.07);
 }
 
-/* Mobile */
+/* MOBILE */
 @media(max-width:700px){
 
   .header{
@@ -928,6 +902,11 @@ body:after{
   .option{
     min-width:0;
   }
+
+  .modal-actions{
+    flex-direction:column;
+  }
+
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -1025,7 +1004,12 @@ body:after{
         Buy USDT
       </div>
 
-      <label class="label">
+
+      <!-- DYNAMIC AMOUNT LABEL -->
+      <label
+        class="label"
+        id="amountLabel"
+      >
         Enter amount (INR)
       </label>
 
@@ -1034,6 +1018,7 @@ body:after{
         id="amount"
         type="number"
         min="1000"
+        step="any"
         placeholder="Enter INR amount"
         oninput="calculateUSDT()"
       >
@@ -1043,11 +1028,14 @@ body:after{
 
         <div>
 
-          <div class="label">
+          <div class="label" id="receiveLabel">
             You receive
           </div>
 
-          <div class="receive-value" id="receive">
+          <div
+            class="receive-value"
+            id="receive"
+          >
             0 USDT
           </div>
 
@@ -1057,6 +1045,8 @@ body:after{
 
 
       <div class="grid">
+
+        <!-- NETWORK -->
 
         <div>
 
@@ -1092,6 +1082,8 @@ body:after{
         </div>
 
 
+        <!-- PAYMENT -->
+
         <div>
 
           <div class="option-title">
@@ -1111,7 +1103,7 @@ body:after{
               class="option"
               onclick="selectPayment(this,'Crypto')"
             >
-              Crypto
+              USDT
             </button>
 
           </div>
@@ -1120,6 +1112,8 @@ body:after{
 
       </div>
 
+
+      <!-- WALLET -->
 
       <div class="wallet">
 
@@ -1136,12 +1130,17 @@ body:after{
       </div>
 
 
-      <button class="buy-btn" onclick="checkout()">
+      <button
+        class="buy-btn"
+        onclick="checkout()"
+      >
         Continue to Payment →
       </button>
 
     </div>
 
+
+    <!-- FEATURES -->
 
     <div class="features">
 
@@ -1194,35 +1193,6 @@ body:after{
         </p>
 
       </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- BUY PAGE -->
-<section class="page" id="buyPage">
-
-  <div class="container">
-
-    <div class="panel">
-
-      <h2 style="margin-bottom:10px;">
-        Buy USDT
-      </h2>
-
-      <p style="color:var(--muted);margin-bottom:20px;">
-        Select your amount and payment method.
-      </p>
-
-      <button
-        class="buy-btn"
-        onclick="showPage('home')"
-      >
-        Start Purchase
-      </button>
 
     </div>
 
@@ -1374,7 +1344,7 @@ body:after{
 
     <div class="modal-row">
 
-      <div class="label">
+      <div class="label" id="checkoutAmountLabel">
         Amount
       </div>
 
@@ -1388,7 +1358,7 @@ body:after{
     <div class="modal-row">
 
       <div class="label">
-        USDT
+        You will receive
       </div>
 
       <strong id="checkoutUSDT">
@@ -1460,11 +1430,11 @@ body:after{
       ₮
     </div>
 
-    <h2>
+    <h2 id="minPopupTitle">
       Minimum Amount Required
     </h2>
 
-    <p>
+    <p id="minPopupText">
       The minimum purchase amount is
       <strong>₹1000</strong>.
       Please enter ₹1000 or more to continue.
@@ -1517,15 +1487,11 @@ const ORDERS_KEY = "usdtx_orders";
 function getUsers(){
 
   try{
-
     return JSON.parse(
       localStorage.getItem(USERS_KEY)
     ) || [];
-
   }catch(e){
-
     return [];
-
   }
 
 }
@@ -1534,15 +1500,11 @@ function getUsers(){
 function getOrders(){
 
   try{
-
     return JSON.parse(
       localStorage.getItem(ORDERS_KEY)
     ) || [];
-
   }catch(e){
-
     return [];
-
   }
 
 }
@@ -1598,9 +1560,7 @@ function showPage(page){
   document
     .querySelectorAll(".page")
     .forEach(function(p){
-
       p.classList.remove("active");
-
     });
 
 
@@ -1658,6 +1618,64 @@ function showPage(page){
 
 
 /* =========================
+   PAYMENT MODE
+========================= */
+
+function updateAmountMode(){
+
+  const label =
+    document.getElementById("amountLabel");
+
+  const input =
+    document.getElementById("amount");
+
+  const receiveLabel =
+    document.getElementById("receiveLabel");
+
+
+  if(selectedPayment === "Crypto"){
+
+    /* USDT MODE */
+
+    label.textContent =
+      "Enter amount (USDT)";
+
+    input.placeholder =
+      "Enter USDT amount";
+
+    input.min =
+      "10";
+
+    receiveLabel.textContent =
+      "You pay";
+
+    document.getElementById("receive").textContent =
+      "0 USDT";
+
+  }else{
+
+    /* INR MODE */
+
+    label.textContent =
+      "Enter amount (INR)";
+
+    input.placeholder =
+      "Enter INR amount";
+
+    input.min =
+      "1000";
+
+    receiveLabel.textContent =
+      "You receive";
+
+    calculateUSDT();
+
+  }
+
+}
+
+
+/* =========================
    CALCULATOR
 ========================= */
 
@@ -1668,17 +1686,36 @@ function calculateUSDT(){
       document.getElementById("amount").value
     ) || 0;
 
+
+  const receive =
+    document.getElementById("receive");
+
+
+  if(selectedPayment === "Crypto"){
+
+    /* User enters USDT */
+
+    receive.textContent =
+      amount.toFixed(2) + " USDT";
+
+    return;
+
+  }
+
+
+  /* User enters INR */
+
   const usdt =
     amount / USDT_RATE;
 
-  document.getElementById("receive").textContent =
+  receive.textContent =
     usdt.toFixed(2) + " USDT";
 
 }
 
 
 /* =========================
-   OPTIONS
+   NETWORK
 ========================= */
 
 function selectNetwork(button,network){
@@ -1688,15 +1725,17 @@ function selectNetwork(button,network){
   button.parentElement
     .querySelectorAll(".option")
     .forEach(function(btn){
-
       btn.classList.remove("active");
-
     });
 
   button.classList.add("active");
 
 }
 
+
+/* =========================
+   PAYMENT
+========================= */
 
 function selectPayment(button,payment){
 
@@ -1705,12 +1744,18 @@ function selectPayment(button,payment){
   button.parentElement
     .querySelectorAll(".option")
     .forEach(function(btn){
-
       btn.classList.remove("active");
-
     });
 
   button.classList.add("active");
+
+
+  /*
+   * Change amount field
+   * between INR and USDT
+   */
+
+  updateAmountMode();
 
 }
 
@@ -1726,23 +1771,25 @@ function toast(message){
   const el =
     document.getElementById("toast");
 
-  el.textContent = message;
+  el.textContent =
+    message;
 
   el.classList.add("show");
 
   clearTimeout(toastTimer);
 
-  toastTimer = setTimeout(function(){
+  toastTimer =
+    setTimeout(function(){
 
-    el.classList.remove("show");
+      el.classList.remove("show");
 
-  },2800);
+    },2800);
 
 }
 
 
 /* =========================
-   MINIMUM AMOUNT POPUP
+   MINIMUM POPUP
 ========================= */
 
 function closeMinPopup(){
@@ -1750,6 +1797,49 @@ function closeMinPopup(){
   document
     .getElementById("minAmountPopup")
     .classList.remove("active");
+
+}
+
+
+function showMinimumPopup(){
+
+  const title =
+    document.getElementById(
+      "minPopupTitle"
+    );
+
+  const text =
+    document.getElementById(
+      "minPopupText"
+    );
+
+
+  if(selectedPayment === "Crypto"){
+
+    title.textContent =
+      "Minimum USDT Required";
+
+    text.innerHTML =
+      "The minimum purchase amount is " +
+      "<strong>10 USDT</strong>." +
+      "<br>Please enter 10 USDT or more to continue.";
+
+  }else{
+
+    title.textContent =
+      "Minimum Amount Required";
+
+    text.innerHTML =
+      "The minimum purchase amount is " +
+      "<strong>₹1000</strong>." +
+      "<br>Please enter ₹1000 or more to continue.";
+
+  }
+
+
+  document
+    .getElementById("minAmountPopup")
+    .classList.add("active");
 
 }
 
@@ -1774,19 +1864,39 @@ function checkout(){
 
   if(amount <= 0){
 
-    toast("Please enter a valid amount.");
+    toast(
+      selectedPayment === "Crypto"
+      ? "Please enter a valid USDT amount."
+      : "Please enter a valid INR amount."
+    );
 
     return;
 
   }
 
 
-  /* Minimum ₹1000 */
-  if(amount < 1000){
+  /* =========================
+     MINIMUM CHECK
+  ========================= */
 
-    document
-      .getElementById("minAmountPopup")
-      .classList.add("active");
+  if(
+    selectedPayment === "Crypto" &&
+    amount < 10
+  ){
+
+    showMinimumPopup();
+
+    return;
+
+  }
+
+
+  if(
+    selectedPayment === "UPI" &&
+    amount < 1000
+  ){
+
+    showMinimumPopup();
 
     return;
 
@@ -1795,27 +1905,69 @@ function checkout(){
 
   if(!wallet){
 
-    toast("Please enter your wallet address.");
+    toast(
+      "Please enter your wallet address."
+    );
 
     return;
 
   }
 
 
-  const usdt =
-    amount / USDT_RATE;
+  /*
+   * Calculate actual USDT
+   */
+
+  let usdtAmount;
+  let displayAmount;
+
+
+  if(selectedPayment === "Crypto"){
+
+    /* User entered USDT directly */
+
+    usdtAmount =
+      amount;
+
+    displayAmount =
+      amount.toFixed(2) +
+      " USDT";
+
+    document
+      .getElementById("checkoutAmountLabel")
+      .textContent =
+      "USDT Amount";
+
+  }else{
+
+    /* User entered INR */
+
+    usdtAmount =
+      amount / USDT_RATE;
+
+    displayAmount =
+      "₹" +
+      amount.toFixed(2);
+
+    document
+      .getElementById("checkoutAmountLabel")
+      .textContent =
+      "INR Amount";
+
+  }
 
 
   document
     .getElementById("checkoutAmount")
     .textContent =
-    "₹" + amount.toFixed(2);
+    displayAmount;
 
 
   document
     .getElementById("checkoutUSDT")
     .textContent =
-    usdt.toFixed(2) + " USDT";
+    usdtAmount.toFixed(2) +
+    " USDT";
 
 
   document
@@ -1827,7 +1979,9 @@ function checkout(){
   document
     .getElementById("checkoutPayment")
     .textContent =
-    selectedPayment;
+    selectedPayment === "Crypto"
+    ? "USDT"
+    : "UPI";
 
 
   document
@@ -1864,27 +2018,61 @@ function placeOrder(){
       .trim();
 
 
+  let usdtAmount;
+  let inrAmount;
+
+
+  if(selectedPayment === "Crypto"){
+
+    /* Amount entered directly in USDT */
+
+    usdtAmount =
+      amount;
+
+    inrAmount =
+      amount * USDT_RATE;
+
+  }else{
+
+    /* Amount entered in INR */
+
+    inrAmount =
+      amount;
+
+    usdtAmount =
+      amount / USDT_RATE;
+
+  }
+
+
   const orders =
     getOrders();
 
 
   const order = {
 
-    id:"USDT-" + Date.now(),
+    id:
+      "USDT-" + Date.now(),
 
     username:
       getCurrentUser() || "Guest",
 
-    amount:amount,
+    amount:
+      inrAmount,
+
+    enteredAmount:
+      amount,
 
     usdt:
-      (amount / USDT_RATE).toFixed(2),
+      usdtAmount.toFixed(2),
 
     network:
       selectedNetwork,
 
     payment:
-      selectedPayment,
+      selectedPayment === "Crypto"
+      ? "USDT"
+      : "UPI",
 
     wallet:
       wallet,
@@ -2163,8 +2351,9 @@ function renderOrders(){
 
       "<br>" +
 
-      "Receive: " +
+      "USDT: " +
       order.usdt +
+
       " USDT" +
 
       "<br>" +
@@ -2192,7 +2381,7 @@ function renderOrders(){
 
 
 /* =========================
-   MODAL CLICK OUTSIDE
+   OUTSIDE CLICK
 ========================= */
 
 document
@@ -2217,7 +2406,6 @@ document
   });
 
 
-/* Minimum popup outside click */
 document
   .getElementById("minAmountPopup")
   .addEventListener(
