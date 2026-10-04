@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USDTX — Buy USDT</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#050807;
+    --panel:#0b100e;
+    --panel2:#0e1512;
+    --green:#00ff88;
+    --green2:#00c96b;
+    --text:#f2fff8;
+    --muted:#91a39a;
+    --border:rgba(0,255,136,.14);
+    --danger:#ff4d67;
+}
+
+body{
+    background:
+        radial-gradient(circle at 20% 0%,rgba(0,255,136,.10),transparent 30%),
+        radial-gradient(circle at 90% 20%,rgba(0,190,255,.08),transparent 25%),
+        var(--bg);
+    color:var(--text);
+    font-family:Arial,Helvetica,sans-serif;
+    min-height:100vh;
+}
+
+button,input,select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+/* HEADER */
+header{
+    height:72px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 5%;
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(5,8,7,.88);
+    backdrop-filter:blur(16px);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:21px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.logo-icon{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:var(--green);
+    color:#001a0c;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:1000;
+    box-shadow:0 0 25px rgba(0,255,136,.35);
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.balance-mini{
+    border:1px solid var(--border);
+    background:#09100d;
+    padding:10px 14px;
+    border-radius:10px;
+    font-size:13px;
+    color:var(--muted);
+}
+
+.balance-mini b{
+    color:var(--green);
+}
+
+.menu-btn{
+    width:43px;
+    height:43px;
+    border:1px solid var(--border);
+    background:#0b120f;
+    color:white;
+    border-radius:10px;
+    font-size:22px;
+}
+
+/* SIDE MENU */
+.overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    z-index:199;
+}
+
+.overlay.show{
+    display:block;
+}
+
+.side-menu{
+    position:fixed;
+    right:-330px;
+    top:0;
+    width:320px;
+    max-width:88%;
+    height:100vh;
+    background:#080d0b;
+    border-left:1px solid var(--border);
+    z-index:200;
+    padding:25px;
+    transition:.3s ease;
+}
+
+.side-menu.open{
+    right:0;
+}
+
+.menu-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:28px;
+}
+
+.menu-top h3{
+    color:var(--green);
+}
+
+.close-menu{
+    background:none;
+    border:0;
+    color:white;
+    font-size:28px;
+}
+
+.menu-user{
+    padding:15px;
+    background:#0d1612;
+    border:1px solid var(--border);
+    border-radius:13px;
+    margin-bottom:18px;
+}
+
+.menu-user small{
+    color:var(--muted);
+}
+
+.menu-user strong{
+    display:block;
+    margin-top:5px;
+}
+
+.menu-link{
+    width:100%;
+    text-align:left;
+    padding:14px;
+    border:1px solid transparent;
+    background:transparent;
+    color:#dff8eb;
+    border-radius:10px;
+    margin-bottom:5px;
+}
+
+.menu-link:hover{
+    background:#0e1813;
+    border-color:var(--border);
+}
+
+.menu-danger{
+    color:#ff7588;
+}
+
+/* MAIN */
+main{
+    width:100%;
+}
+
+.hero{
+    max-width:1100px;
+    margin:auto;
+    padding:70px 20px 35px;
+    text-align:center;
+}
+
+.badge{
+    display:inline-flex;
+    padding:7px 12px;
+    border:1px solid var(--border);
+    border-radius:50px;
+    color:var(--green);
+    background:rgba(0,255,136,.05);
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:clamp(38px,7vw,76px);
+    line-height:1;
+    letter-spacing:-3px;
+}
+
+.hero h1 span{
+    color:var(--green);
+    text-shadow:0 0 30px rgba(0,255,136,.25);
+}
+
+.hero p{
+    color:var(--muted);
+    max-width:600px;
+    margin:18px auto 0;
+    line-height:1.7;
+}
+
+/* BUY CARD */
+.buy-wrap{
+    max-width:850px;
+    margin:20px auto 60px;
+    padding:0 20px;
+}
+
+.buy-card{
+    background:linear-gradient(145deg,#0c1410,#080d0b);
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:28px;
+    box-shadow:0 20px 70px rgba(0,0,0,.3);
+}
+
+.card-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:24px;
+}
+
+.card-title h2{
+    font-size:22px;
+}
+
+.live{
+    color:var(--green);
+    font-size:12px;
+    display:flex;
+    gap:6px;
+    align-items:center;
+}
+
+.live i{
+    width:7px;
+    height:7px;
+    background:var(--green);
+    border-radius:50%;
+    box-shadow:0 0 10px var(--green);
+}
+
+/* RATE */
+.rate-box{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.input-box label,
+.field label{
+    display:block;
+    color:var(--muted);
+    font-size:12px;
+    margin-bottom:8px;
+}
+
+.input-wrap{
+    position:relative;
+}
+
+.input-wrap span{
+    position:absolute;
+    left:15px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--green);
+    font-weight:bold;
+}
+
+.input-wrap input{
+    padding-left:48px;
+}
+
+input,select{
+    width:100%;
+    padding:15px;
+    border:1px solid #1a2b23;
+    background:#070c0a;
+    color:white;
+    outline:none;
+    border-radius:11px;
+}
+
+input:focus,select:focus{
+    border-color:rgba(0,255,136,.55);
+    box-shadow:0 0 0 3px rgba(0,255,136,.06);
+}
+
+.result-box{
+    background:#07140d;
+    border:1px solid rgba(0,255,136,.2);
+    border-radius:14px;
+    padding:18px;
+    margin-bottom:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.result-box small{
+    color:var(--muted);
+}
+
+.result-usdt{
+    color:var(--green);
+    font-size:25px;
+    font-weight:900;
+}
+
+/* NETWORK */
+.networks{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.network{
+    padding:14px;
+    background:#080e0b;
+    border:1px solid #18251f;
+    color:#a8b8b0;
+    border-radius:11px;
+    text-align:center;
+}
+
+.network.active{
+    color:var(--green);
+    border-color:var(--green);
+    background:rgba(0,255,136,.06);
+}
+
+/* PAYMENT */
+.payment-methods{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.payment{
+    border:1px solid #18251f;
+    background:#080e0b;
+    padding:15px;
+    border-radius:11px;
+    color:#b8c7bf;
+    text-align:center;
+}
+
+.payment.active{
+    border-color:var(--green);
+    color:var(--green);
+    background:rgba(0,255,136,.05);
+}
+
+.wallet{
+    margin-bottom:20px;
+}
+
+.wallet input{
+    margin-top:0;
+}
+
+.network-note{
+    font-size:11px;
+    color:#74857d;
+    margin-top:7px;
+}
+
+.buy-btn{
+    width:100%;
+    border:0;
+    padding:17px;
+    border-radius:12px;
+    background:var(--green);
+    color:#001b0d;
+    font-size:16px;
+    font-weight:900;
+    box-shadow:0 0 30px rgba(0,255,136,.15);
+}
+
+.buy-btn:hover{
+    background:#37ff9f;
+    transform:translateY(-1px);
+}
+
+/* FEATURES */
+.features{
+    max-width:1050px;
+    margin:0 auto 70px;
+    padding:0 20px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.feature{
+    padding:22px;
+    background:#09100d;
+    border:1px solid var(--border);
+    border-radius:16px;
+}
+
+.feature-icon{
+    font-size:25px;
+    margin-bottom:12px;
+}
+
+.feature h3{
+    margin-bottom:8px;
+}
+
+.feature p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* PAGES */
+.page{
+    display:none;
+    max-width:850px;
+    margin:50px auto;
+    padding:0 20px 80px;
+}
+
+.page.active{
+    display:block;
+}
+
+.page-card{
+    background:#0a110e;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:25px;
+}
+
+.page h2{
+    margin-bottom:20px;
+}
+
+.account-info{
+    display:grid;
+    gap:10px;
+}
+
+.info-row{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:14px;
+    background:#080e0b;
+    border-radius:10px;
+}
+
+.info-row span:first-child{
+    color:var(--muted);
+}
+
+.order{
+    padding:17px;
+    border:1px solid #18251f;
+    background:#080e0b;
+    border-radius:12px;
+    margin-bottom:10px;
+}
+
+.order-top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.status{
+    color:var(--green);
+    font-size:12px;
+}
+
+.empty{
+    color:var(--muted);
+    text-align:center;
+    padding:35px 10px;
+}
+
+/* AUTH MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:500;
+    background:rgba(0,0,0,.78);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.auth-box{
+    width:100%;
+    max-width:430px;
+    background:#09100d;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:25px;
+}
+
+.auth-head{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:22px;
+}
+
+.auth-head button{
+    background:none;
+    border:0;
+    color:#aaa;
+    font-size:24px;
+}
+
+.auth-tabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-bottom:18px;
+}
+
+.auth-tab{
+    padding:12px;
+    background:#070c0a;
+    border:1px solid #18251f;
+    color:#89988f;
+    border-radius:9px;
+}
+
+.auth-tab.active{
+    color:var(--green);
+    border-color:var(--green);
+}
+
+.auth-form{
+    display:none;
+}
+
+.auth-form.active{
+    display:block;
+}
+
+.auth-form .field{
+    margin-bottom:13px;
+}
+
+.auth-submit{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:10px;
+    background:var(--green);
+    color:#001b0d;
+    font-weight:900;
+    margin-top:5px;
+}
+
+.message{
+    margin-top:12px;
+    font-size:13px;
+    color:#ff8292;
+    min-height:18px;
+}
+
+/* CHECKOUT MODAL */
+.checkout-box{
+    width:100%;
+    max-width:500px;
+    background:#09100d;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:25px;
+}
+
+.summary{
+    background:#07140d;
+    border:1px solid rgba(0,255,136,.15);
+    padding:16px;
+    border-radius:12px;
+    margin:15px 0;
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    margin:8px 0;
+}
+
+.qr{
+    width:190px;
+    height:190px;
+    background:white;
+    margin:15px auto;
+    padding:8px;
+    display:block;
+}
+
+.address-box{
+    background:#060b09;
+    border:1px solid #17241e;
+    border-radius:9px;
+    padding:12px;
+    word-break:break-all;
+    font-size:12px;
+    color:#b9c9c1;
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.copy-btn{
+    flex:none;
+    border:1px solid var(--border);
+    background:#0b1711;
+    color:var(--green);
+    padding:7px 10px;
+    border-radius:7px;
+}
+
+.confirm-btn{
+    width:100%;
+    margin-top:15px;
+    border:0;
+    background:var(--green);
+    color:#001b0d;
+    padding:15px;
+    border-radius:10px;
+    font-weight:900;
+}
+
+/* TOAST */
+.toast{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%) translateY(100px);
+    background:#102019;
+    border:1px solid var(--green);
+    color:white;
+    padding:13px 18px;
+    border-radius:10px;
+    z-index:900;
+    transition:.3s;
+}
+
+.toast.show{
+    transform:translateX(-50%) translateY(0);
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    color:#64736c;
+    border-top:1px solid var(--border);
+    padding:25px 15px;
+    font-size:12px;
+}
+
+/* MOBILE */
+@media(max-width:700px){
+    header{
+        padding:0 15px;
+    }
+
+    .balance-mini{
+        display:none;
+    }
+
+    .hero{
+        padding-top:50px;
+    }
+
+    .hero h1{
+        letter-spacing:-2px;
+    }
+
+    .buy-card{
+        padding:18px;
+    }
+
+    .rate-box{
+        grid-template-columns:1fr;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .networks{
+        grid-template-columns:1fr;
+    }
+
+    .payment-methods{
+        grid-template-columns:1fr;
+    }
+
+    .result-box{
+        align-items:flex-start;
+        gap:10px;
+        flex-direction:column;
+    }
+
+    .side-menu{
+        width:300px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="logo">
+        <div class="logo-icon">₮</div>
+        USDTX
+    </div>
+
+    <div class="header-right">
+        <div class="balance-mini">
+            Rate: <b>₹100 / USDT</b>
+        </div>
+
+        <button class="menu-btn" onclick="openMenu()">☰</button>
+    </div>
+</header>
+
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<!-- SIDE MENU -->
+<div class="side-menu" id="sideMenu">
+
+    <div class="menu-top">
+        <h3>USDTX</h3>
+        <button class="close-menu" onclick="closeMenu()">×</button>
+    </div>
+
+    <div class="menu-user" id="menuUser">
+        <small>Guest</small>
+        <strong>Welcome</strong>
+    </div>
+
+    <div id="guestMenu">
+        <button class="menu-link" onclick="openAuth('login');closeMenu()">
+            🔐 Login
+        </button>
+
+        <button class="menu-link" onclick="openAuth('register');closeMenu()">
+            ✨ Register
+        </button>
+    </div>
+
+    <div id="userMenu" style="display:none">
+
+        <button class="menu-link" onclick="openAccount();closeMenu()">
+            👤 My Account
+        </button>
+
+        <button class="menu-link" onclick="openOrders();closeMenu()">
+            📦 My Orders
+        </button>
+
+        <button class="menu-link" onclick="goHome();closeMenu()">
+            🏠 Buy USDT
+        </button>
+
+        <button class="menu-link menu-danger" onclick="logout();closeMenu()">
+            🚪 Logout
+        </button>
+
+    </div>
+
+</div>
+
+<main>
+
+<!-- HOME -->
+<section id="homePage">
+
+    <div class="hero">
+
+        <div class="badge">
+            ● FAST & SIMPLE USDT PURCHASE
+        </div>
+
+        <h1>
+            Buy <span>USDT</span><br>
+            Easily & Securely
+        </h1>
+
+        <p>
+            Enter your amount, choose your network and provide your
+            wallet address. Complete your payment and submit your order.
+        </p>
+
+    </div>
+
+    <div class="buy-wrap">
+
+        <div class="buy-card">
+
+            <div class="card-title">
+                <h2>Buy USDT</h2>
+
+                <div class="live">
+                    <i></i> Rate Live
+                </div>
+            </div>
+
+            <!-- AMOUNT -->
+            <div class="rate-box">
+
+                <div class="input-box">
+
+                    <label>You Pay</label>
+
+                    <div class="input-wrap">
+                        <span>₹</span>
+                        <input
+                            id="inrAmount"
+                            type="number"
+                            min="100"
+                            value="1000"
+                            oninput="calculateUSDT()"
+                        >
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>You Receive</label>
+
+                    <div class="input-wrap">
+                        <span>₮</span>
+                        <input
+                            id="usdtAmount"
+                            type="text"
+                            readonly
+                        >
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="result-box">
+
+                <div>
+                    <small>Exchange Rate</small>
+                    <div>1 USDT = ₹100</div>
+                </div>
+
+                <div>
+                    <small>You Receive</small>
+                    <div class="result-usdt" id="receiveText">
+                        10 USDT
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- NETWORK -->
+            <div class="field">
+
+                <label>USDT Network</label>
+
+                <div class="networks">
+
+                    <button
+                        class="network active"
+                        onclick="selectNetwork(this,'TRC20')"
+                    >
+                        TRC20
+                    </button>
+
+                    <button
+                        class="network"
+                        onclick="selectNetwork(this,'ERC20')"
+                    >
+                        ERC20
+                    </button>
+
+                    <button
+                        class="network"
+                        onclick="selectNetwork(this,'BEP20')"
+                    >
+                        BEP20
+                    </button>
+
+                </div>
+
+                <div class="network-note" id="networkNote">
+                    Selected network: TRC20
+                </div>
+
+            </div>
+
+            <!-- WALLET -->
+            <div class="wallet field">
+
+                <label>Your USDT Wallet Address</label>
+
+                <input
+                    id="walletAddress"
+                    type="text"
+                    placeholder="Enter your USDT wallet address"
+                >
+
+                <div class="network-note">
+                    Make sure the wallet address belongs to the selected network.
+                </div>
+
+            </div>
+
+            <!-- PAYMENT -->
+            <div class="field">
+
+                <label>Payment Method</label>
+
+                <div class="payment-methods">
+
+                    <button
+                        class="payment active"
+                        onclick="selectPayment(this,'UPI')"
+                    >
+                        📱 UPI
+                    </button>
+
+                    <button
+                        class="payment"
+                        onclick="selectPayment(this,'CRYPTO')"
+                    >
+                        ₮ Crypto
+                    </button>
+
+                </div>
+
+            </div>
+
+            <button class="buy-btn" onclick="startOrder()">
+                Continue → Buy USDT
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- FEATURES -->
+    <div class="features">
+
+        <div class="feature">
+            <div class="feature-icon">⚡</div>
+            <h3>Fast Processing</h3>
+            <p>
+                Submit your order and track the status from your account.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🔒</div>
+            <h3>Wallet Based</h3>
+            <p>
+                Enter your own USDT wallet address for receiving funds.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">📋</div>
+            <h3>Order Tracking</h3>
+            <p>
+                Every submitted purchase receives a unique order ID.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ACCOUNT PAGE -->
+<section class="page" id="accountPage">
+
+    <div class="page-card">
+
+        <h2>My Account</h2>
+
+        <div class="account-info">
+
+            <div class="info-row">
+                <span>Username</span>
+                <strong id="accountUsername">-</strong>
+            </div>
+
+            <div class="info-row">
+                <span>Email</span>
+                <strong id="accountEmail">-</strong>
+            </div>
+
+            <div class="info-row">
+                <span>Member Since</span>
+                <strong id="accountDate">-</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ORDERS PAGE -->
+<section class="page" id="ordersPage">
+
+    <div class="page-card">
+
+        <h2>My Orders</h2>
+
+        <div id="ordersList"></div>
+
+    </div>
+
+</section>
+
+</main>
+
+<footer>
+    © 2026 USDTX — Digital Asset Purchase Platform
+</footer>
+
+
+<!-- AUTH MODAL -->
+<div class="modal" id="authModal">
+
+    <div class="auth-box">
+
+        <div class="auth-head">
+            <h2>Account</h2>
+            <button onclick="closeAuth()">×</button>
+        </div>
+
+        <div class="auth-tabs">
+
+            <button
+                class="auth-tab active"
+                id="loginTab"
+                onclick="switchAuth('login')"
+            >
+                Login
+            </button>
+
+            <button
+                class="auth-tab"
+                id="registerTab"
+                onclick="switchAuth('register')"
+            >
+                Register
+            </button>
+
+        </div>
+
+        <!-- LOGIN -->
+        <form
+            class="auth-form active"
+            id="loginForm"
+            onsubmit="loginUser(event)"
+        >
+
+            <div class="field">
+                <label>Email</label>
+                <input
+                    id="loginEmail"
+                    type="email"
+                    required
+                    placeholder="you@example.com"
+                >
+            </div>
+
+            <div class="field">
+                <label>Password</label>
+                <input
+                    id="loginPassword"
+                    type="password"
+                    required
+                    placeholder="••••••••"
+                >
+            </div>
+
+            <button class="auth-submit">
+                Login
+            </button>
+
+            <div class="message" id="loginMessage"></div>
+
+        </form>
+
+        <!-- REGISTER -->
+        <form
+            class="auth-form"
+            id="registerForm"
+            onsubmit="registerUser(event)"
+        >
+
+            <div class="field">
+                <label>Username</label>
+                <input
+                    id="registerUsername"
+                    type="text"
+                    required
+                    minlength="3"
+                    placeholder="Your username"
+                >
+            </div>
+
+            <div class="field">
+                <label>Email</label>
+                <input
+                    id="registerEmail"
+                    type="email"
+                    required
+                    placeholder="you@example.com"
+                >
+            </div>
+
+            <div class="field">
+                <label>Password</label>
+                <input
+                    id="registerPassword"
+                    type="password"
+                    required
+                    minlength="6"
+                    placeholder="Minimum 6 characters"
+                >
+            </div>
+
+            <button class="auth-submit">
+                Create Account
+            </button>
+
+            <div class="message" id="registerMessage"></div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- CHECKOUT MODAL -->
+<div class="modal" id="checkoutModal">
+
+    <div class="checkout-box">
+
+        <div class="auth-head">
+
+            <h2>Complete Payment</h2>
+
+            <button onclick="closeCheckout()">×</button>
+
+        </div>
+
+        <div class="summary">
+
+            <div class="summary-row">
+                <span>Amount</span>
+                <strong id="summaryINR">₹0</strong>
+            </div>
+
+            <div class="summary-row">
+                <span>USDT</span>
+                <strong id="summaryUSDT">0 USDT</strong>
+            </div>
+
+            <div class="summary-row">
+                <span>Network</span>
+                <strong id="summaryNetwork">TRC20</strong>
+            </div>
+
+            <div class="summary-row">
+                <span>Payment</span>
+                <strong id="summaryPayment">UPI</strong>
+            </div>
+
+        </div>
+
+        <!-- UPI PAYMENT -->
+        <div id="upiPayment">
+
+            <p style="text-align:center;color:#91a39a;font-size:13px">
+                Scan the QR code using your UPI app.
+            </p>
+
+            <!-- Replace YOUR-UPI-ID with your real UPI ID -->
+            <img
+                class="qr"
+                id="upiQR"
+                src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=YOUR-UPI-ID"
+                alt="UPI QR"
+            >
+
+            <div class="address-box">
+
+                <span style="flex:1">
+                    YOUR-UPI-ID
+                </span>
+
+                <button
+                    class="copy-btn"
+                    onclick="copyText('YOUR-UPI-ID')"
+                >
+                    Copy
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- CRYPTO PAYMENT -->
+        <div id="cryptoPayment" style="display:none">
+
+            <p style="text-align:center;color:#91a39a;font-size:13px">
+                Send the required amount using the displayed network.
+            </p>
+
+            <div class="address-box" style="margin-top:15px">
+
+                <span style="flex:1" id="merchantWallet">
+                    YOUR-USDT-WALLET-ADDRESS
+                </span>
+
+                <button
+                    class="copy-btn"
+                    onclick="copyMerchantWallet()"
+                >
+                    Copy
+                </button>
+
+            </div>
+
+        </div>
+
+        <p style="
+            color:#718078;
+            font-size:11px;
+            line-height:1.6;
+            margin-top:15px;
+        ">
+            After completing payment, submit the order. Payment will need
+            to be verified before any USDT is sent.
+        </p>
+
+        <button
+            class="confirm-btn"
+            onclick="submitOrder()"
+        >
+            I've Completed Payment
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="toast" id="toast">
+    Done
+</div>
+
+
+<script>
+
+/* =========================
+   CONFIG
+========================= */
+
+const USDT_RATE = 100;
+
+
+/* =========================
+   STATE
+========================= */
+
+let selectedNetwork = "TRC20";
+let selectedPayment = "UPI";
+let pendingOrder = null;
+
+
+/* =========================
+   STORAGE
+========================= */
+
+function getUsers(){
+    return JSON.parse(localStorage.getItem("usdtx_users") || "[]");
+}
+
+function saveUsers(users){
+    localStorage.setItem("usdtx_users", JSON.stringify(users));
+}
+
+function getCurrentUser(){
+    return JSON.parse(localStorage.getItem("usdtx_current_user") || "null");
+}
+
+function saveCurrentUser(user){
+    localStorage.setItem(
+        "usdtx_current_user",
+        JSON.stringify(user)
+    );
+}
+
+function getOrders(){
+    return JSON.parse(localStorage.getItem("usdtx_orders") || "[]");
+}
+
+function saveOrders(orders){
+    localStorage.setItem(
+        "usdtx_orders",
+        JSON.stringify(orders)
+    );
+}
+
+
+/* =========================
+   CALCULATOR
+========================= */
+
+function calculateUSDT(){
+
+    let inr = Number(
+        document.getElementById("inrAmount").value
+    );
+
+    if(!inr || inr < 0){
+        inr = 0;
+    }
+
+    const usdt = inr / USDT_RATE;
+
+    document.getElementById("usdtAmount").value =
+        usdt.toFixed(2);
+
+    document.getElementById("receiveText").innerText =
+        usdt.toFixed(2) + " USDT";
+}
+
+
+/* =========================
+   NETWORK
+========================= */
+
+function selectNetwork(button,network){
+
+    document
+        .querySelectorAll(".network")
+        .forEach(x => x.classList.remove("active"));
+
+    button.classList.add("active");
+
+    selectedNetwork = network;
+
+    document.getElementById("networkNote").innerText =
+        "Selected network: " + network;
+}
+
+
+/* =========================
+   PAYMENT
+========================= */
+
+function selectPayment(button,payment){
+
+    document
+        .querySelectorAll(".payment")
+        .forEach(x => x.classList.remove("active"));
+
+    button.classList.add("active");
+
+    selectedPayment = payment;
+}
+
+
+/* =========================
+   AUTH MODAL
+========================= */
+
+function openAuth(type){
+
+    document
+        .getElementById("authModal")
+        .classList.add("show");
+
+    switchAuth(type);
+}
+
+function closeAuth(){
+
+    document
+        .getElementById("authModal")
+        .classList.remove("show");
+
+    document.getElementById("loginMessage").innerText = "";
+    document.getElementById("registerMessage").innerText = "";
+}
+
+function switchAuth(type){
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+    const registerForm =
+        document.getElementById("registerForm");
+
+    const loginTab =
+        document.getElementById("loginTab");
+
+    const registerTab =
+        document.getElementById("registerTab");
+
+    if(type === "login"){
+
+        loginForm.classList.add("active");
+        registerForm.classList.remove("active");
+
+        loginTab.classList.add("active");
+        registerTab.classList.remove("active");
+
+    }else{
+
+        loginForm.classList.remove("active");
+        registerForm.classList.add("active");
+
+        loginTab.classList.remove("active");
+        registerTab.classList.add("active");
+    }
+}
+
+
+/* =========================
+   REGISTER
+========================= */
+
+function registerUser(e){
+
+    e.preventDefault();
+
+    const username =
+        document.getElementById("registerUsername").value.trim();
+
+    const email =
+        document.getElementById("registerEmail").value.trim().toLowerCase();
+
+    const password =
+        document.getElementById("registerPassword").value;
+
+    const users = getUsers();
+
+    const exists = users.find(
+        u => u.email === email
+    );
+
+    if(exists){
+
+        document.getElementById("registerMessage").innerText =
+            "This email is already registered.";
+
+        return;
+    }
+
+    const user = {
+        id: "USR-" + Date.now(),
+        username,
+        email,
+        password,
+        createdAt: new Date().toLocaleDateString()
+    };
+
+    users.push(user);
+
+    saveUsers(users);
+    saveCurrentUser(user);
+
+    closeAuth();
+
+    updateMenu();
+
+    showToast("Account created successfully");
+
+    if(pendingOrder){
+        openCheckout();
+    }
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function loginUser(e){
+
+    e.preventDefault();
+
+    const email =
+        document.getElementById("loginEmail").value.trim().toLowerCase();
+
+    const password =
+        document.getElementById("loginPassword").value;
+
+    const users = getUsers();
+
+    const user = users.find(
+        u =>
+            u.email === email &&
+            u.password === password
+    );
+
+    if(!user){
+
+        document.getElementById("loginMessage").innerText =
+            "Invalid email or password.";
+
+        return;
+    }
+
+    saveCurrentUser(user);
+
+    closeAuth();
+
+    updateMenu();
+
+    showToast("Login successful");
+
+    if(pendingOrder){
+        openCheckout();
+    }
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logout(){
+
+    localStorage.removeItem("usdtx_current_user");
+
+    updateMenu();
+
+    goHome();
+
+    showToast("Logged out");
+}
+
+
+/* =========================
+   MENU
+========================= */
+
+function openMenu(){
+
+    updateMenu();
+
+    document
+        .getElementById("sideMenu")
+        .classList.add("open");
+
+    document
+        .getElementById("overlay")
+        .classList.add("show");
+}
+
+function closeMenu(){
+
+    document
+        .getElementById("sideMenu")
+        .classList.remove("open");
+
+    document
+        .getElementById("overlay")
+        .classList.remove("show");
+}
+
+function updateMenu(){
+
+    const user = getCurrentUser();
+
+    const guest =
+        document.getElementById("guestMenu");
+
+    const logged =
+        document.getElementById("userMenu");
+
+    const menuUser =
+        document.getElementById("menuUser");
+
+    if(user){
+
+        guest.style.display = "none";
+        logged.style.display = "block";
+
+        menuUser.innerHTML = `
+            <small>Logged in as</small>
+            <strong>${escapeHTML(user.username)}</strong>
+        `;
+
+    }else{
+
+        guest.style.display = "block";
+        logged.style.display = "none";
+
+        menuUser.innerHTML = `
+            <small>Guest</small>
+            <strong>Welcome to USDTX</strong>
+        `;
+    }
+}
+
+
+/* =========================
+   ACCOUNT
+========================= */
+
+function openAccount(){
+
+    const user = getCurrentUser();
+
+    if(!user){
+
+        openAuth("login");
+        return;
+    }
+
+    hideAllPages();
+
+    document
+        .getElementById("accountPage")
+        .classList.add("active");
+
+    document.getElementById("accountUsername").innerText =
+        user.username;
+
+    document.getElementById("accountEmail").innerText =
+        user.email;
+
+    document.getElementById("accountDate").innerText =
+        user.createdAt;
+}
+
+
+/* =========================
+   ORDERS
+========================= */
+
+function openOrders(){
+
+    const user = getCurrentUser();
+
+    if(!user){
+
+        openAuth("login");
+        return;
+    }
+
+    hideAllPages();
+
+    document
+        .getElementById("ordersPage")
+        .classList.add("active");
+
+    renderOrders();
+}
+
+function renderOrders(){
+
+    const user = getCurrentUser();
+
+    const list =
+        document.getElementById("ordersList");
+
+    const orders =
+        getOrders().filter(
+            o => o.email === user.email
+        );
+
+    if(!orders.length){
+
+        list.innerHTML = `
+            <div class="empty">
+                You don't have any orders yet.
+            </div>
+        `;
+
+        return;
+    }
+
+    list.innerHTML = orders
+        .reverse()
+        .map(order => `
+
+        <div class="order">
+
+            <div class="order-top">
+
+                <strong>
+                    ${escapeHTML(order.id)}
+                </strong>
+
+                <span class="status">
+                    ${escapeHTML(order.status)}
+                </span>
+
+            </div>
+
+            <div style="color:#9aa9a1;font-size:13px;line-height:1.8">
+
+                ₹${Number(order.inr).toFixed(2)}
+                →
+                ${Number(order.usdt).toFixed(2)} USDT
+
+                <br>
+
+                Network: ${escapeHTML(order.network)}
+
+                <br>
+
+                Payment: ${escapeHTML(order.payment)}
+
+                <br>
+
+                ${escapeHTML(order.date)}
+
+            </div>
+
+        </div>
+
+        `)
+        .join("");
+}
+
+
+/* =========================
+   HOME
+========================= */
+
+function goHome(){
+
+    hideAllPages();
+
+    document
+        .getElementById("homePage")
+        .style.display = "block";
+}
+
+function hideAllPages(){
+
+    document
+        .getElementById("homePage")
+        .style.display = "none";
+
+    document
+        .getElementById("accountPage")
+        .classList.remove("active");
+
+    document
+        .getElementById("ordersPage")
+        .classList.remove("active");
+}
+
+
+/* =========================
+   START ORDER
+========================= */
+
+function startOrder(){
+
+    const amount =
+        Number(
+            document.getElementById("inrAmount").value
+        );
+
+    const wallet =
+        document
+            .getElementById("walletAddress")
+            .value
+            .trim();
+
+    if(!amount || amount < 100){
+
+        showToast("Minimum amount is ₹100");
+        return;
+    }
+
+    if(!wallet){
+
+        showToast("Enter your USDT wallet address");
+        return;
+    }
+
+    const user = getCurrentUser();
+
+    pendingOrder = {
+        inr: amount,
+        usdt: amount / USDT_RATE,
+        network: selectedNetwork,
+        payment: selectedPayment,
+        wallet
+    };
+
+    if(!user){
+
+        openAuth("login");
+
+        showToast("Login required to continue");
+
+        return;
+    }
+
+    openCheckout();
+}
+
+
+/* =========================
+   CHECKOUT
+========================= */
+
+function openCheckout(){
+
+    if(!pendingOrder){
+        return;
+    }
+
+    document.getElementById("summaryINR").innerText =
+        "₹" + pendingOrder.inr.toFixed(2);
+
+    document.getElementById("summaryUSDT").innerText =
+        pendingOrder.usdt.toFixed(2) + " USDT";
+
+    document.getElementById("summaryNetwork").innerText =
+        pendingOrder.network;
+
+    document.getElementById("summaryPayment").innerText =
+        pendingOrder.payment;
+
+    if(pendingOrder.payment === "UPI"){
+
+        document.getElementById("upiPayment")
+            .style.display = "block";
+
+        document.getElementById("cryptoPayment")
+            .style.display = "none";
+
+    }else{
+
+        document.getElementById("upiPayment")
+            .style.display = "none";
+
+        document.getElementById("cryptoPayment")
+            .style.display = "block";
+    }
+
+    document
+        .getElementById("checkoutModal")
+        .classList.add("show");
+}
+
+function closeCheckout(){
+
+    document
+        .getElementById("checkoutModal")
+        .classList.remove("show");
+}
+
+
+/* =========================
+   SUBMIT ORDER
+========================= */
+
+function submitOrder(){
+
+    const user = getCurrentUser();
+
+    if(!user){
+
+        closeCheckout();
+        openAuth("login");
+
+        return;
+    }
+
+    if(!pendingOrder){
+        return;
+    }
+
+    const order = {
+
+        id:
+            "USDT-" +
+            Math.random()
+                .toString(36)
+                .substring(2,8)
+                .toUpperCase(),
+
+        email:user.email,
+
+        username:user.username,
+
+        inr:pendingOrder.inr,
+
+        usdt:pendingOrder.usdt,
+
+        network:pendingOrder.network,
+
+        payment:pendingOrder.payment,
+
+        wallet:pendingOrder.wallet,
+
+        status:"Payment Verification Pending",
+
+        date:new Date().toLocaleString()
+
+    };
+
+    const orders = getOrders();
+
+    orders.push(order);
+
+    saveOrders(orders);
+
+    pendingOrder = null;
+
+    closeCheckout();
+
+    showToast("Order submitted successfully");
+
+    setTimeout(() => {
+
+        openOrders();
+
+    },700);
+}
+
+
+/* =========================
+   COPY
+========================= */
+
+function copyText(text){
+
+    navigator.clipboard
+        .writeText(text)
+        .then(() => {
+
+            showToast("Copied");
+
+        });
+}
+
+function copyMerchantWallet(){
+
+    const wallet =
+        document.getElementById("merchantWallet")
+            .innerText;
+
+    copyText(wallet);
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.innerText = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    },2500);
+}
+
+
+/* =========================
+   SECURITY DISPLAY
+========================= */
+
+function escapeHTML(value){
+
+    return String(value)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+calculateUSDT();
+updateMenu();
+
+</script>
+
+</body>
+</html>
