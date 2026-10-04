@@ -815,7 +815,8 @@ body:after{
   <a href="#" onclick="showPage('orders');closeMenu();return false;">📦 My Orders</a>
   <a href="#" onclick="showPage('account');closeMenu();return false;">👤 My Account</a>
   <a href="#" onclick="openAuth();closeMenu();return false;">🔐 Login / Register</a>
-  <a href="#" onclick="openAdmin();closeMenu();return false;">⚙️ Admin</a>
+  
+  
 </div>
 
 <!-- HOME -->
@@ -1015,26 +1016,7 @@ body:after{
 
 </section>
 
-<!-- ADMIN -->
-<section class="page" id="adminPage">
 
-  <div class="container">
-
-    <div class="panel">
-
-      <h2 style="margin-bottom:8px;">Admin Panel</h2>
-
-      <p style="color:var(--muted);margin-bottom:20px;">
-        Payment verification dashboard
-      </p>
-
-      <div id="adminOrders"></div>
-
-    </div>
-
-  </div>
-
-</section>
 
 <!-- AUTH MODAL -->
 <div class="overlay" id="authModal">
@@ -1577,147 +1559,7 @@ function renderOrders(){
 
 }
 
-/* =========================
-   ADMIN
-========================= */
 
-function openAdmin(){
-
-  const username = prompt("Admin username:");
-
-  if(username !== "admin"){
-    toast("Invalid admin username.");
-    return;
-  }
-
-  const password = prompt("Admin password:");
-
-  if(password !== "admin123"){
-    toast("Invalid admin password.");
-    return;
-  }
-
-  showPage("admin");
-
-}
-
-function renderAdmin(){
-
-  const container =
-    document.getElementById("adminOrders");
-
-  const orders = getOrders();
-
-  if(!orders.length){
-
-    container.innerHTML =
-      "<p style='color:var(--muted)'>No orders found.</p>";
-
-    return;
-  }
-
-  container.innerHTML = "";
-
-  orders.forEach(function(order,index){
-
-    const div = document.createElement("div");
-
-    div.className = "order";
-
-    div.innerHTML =
-
-      "<strong>" + order.id + "</strong>" +
-
-      "<br><span style='color:var(--muted)'>" +
-      order.created +
-      "</span>" +
-
-      "<br><br>" +
-
-      "User: " + order.username +
-
-      "<br>" +
-
-      "Amount: ₹" + Number(order.amount).toFixed(2) +
-
-      "<br>" +
-
-      "USDT: " + order.usdt +
-
-      "<br>" +
-
-      "Network: " + order.network +
-
-      "<br>" +
-
-      "Payment: " + order.payment +
-
-      "<br>" +
-
-      "Wallet: " +
-
-      "<span style='word-break:break-all'>" +
-      order.wallet +
-      "</span>" +
-
-      "<br><br>" +
-
-      "<span class='status'>" +
-      order.status +
-      "</span>" +
-
-      "<div style='display:flex;gap:8px;margin-top:14px'>" +
-
-      "<button class='buy-btn' " +
-      "style='margin:0;padding:11px' " +
-      "onclick='approveOrder(" + index + ")'>" +
-      "Approve" +
-      "</button>" +
-
-      "<button class='secondary-btn' " +
-      "onclick='rejectOrder(" + index + ")'>" +
-      "Reject" +
-      "</button>" +
-
-      "</div>";
-
-    container.appendChild(div);
-
-  });
-
-}
-
-function approveOrder(index){
-
-  const orders = getOrders();
-
-  if(!orders[index]) return;
-
-  orders[index].status = "Approved";
-
-  saveOrders(orders);
-
-  renderAdmin();
-
-  toast("Order approved.");
-
-}
-
-function rejectOrder(index){
-
-  const orders = getOrders();
-
-  if(!orders[index]) return;
-
-  orders[index].status = "Rejected";
-
-  saveOrders(orders);
-
-  renderAdmin();
-
-  toast("Order rejected.");
-
-}
 
 /* =========================
    MODAL CLICK OUTSIDE
