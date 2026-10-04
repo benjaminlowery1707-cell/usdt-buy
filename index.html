@@ -90,24 +90,24 @@ header{
     display:block;
 }
 
+.usdt-logo{
+    width:22px;
+    height:22px;
+    display:inline-block;
+    vertical-align:middle;
+    flex:0 0 auto;
+}
+
+.usdt-logo.sm{width:18px;height:18px;}
+.usdt-logo.lg{width:26px;height:26px;}
+
 .header-right{
     display:flex;
     align-items:center;
     gap:12px;
 }
 
-.balance-mini{
-    border:1px solid var(--border);
-    background:#09100d;
-    padding:10px 14px;
-    border-radius:10px;
-    font-size:13px;
-    color:var(--muted);
-}
 
-.balance-mini b{
-    color:var(--green);
-}
 
 .menu-btn{
     width:43px;
@@ -722,10 +722,6 @@ footer{
         padding:0 15px;
     }
 
-    .balance-mini{
-        display:none;
-    }
-
     .hero{
         padding-top:50px;
     }
@@ -773,20 +769,15 @@ footer{
 <header>
     <div class="logo">
         <div class="logo-icon" aria-label="USDT Tether logo">
-            <svg viewBox="0 0 64 64" aria-hidden="true">
-                <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="4"/>
-                <path d="M15 18h34v8H39v21h-7V26h-7v21h-7V26h-3z" fill="currentColor"/>
-                <rect x="13" y="15" width="38" height="7" rx="2" fill="currentColor"/>
+            <svg class="usdt-logo lg" viewBox="0 0 64 64" aria-hidden="true">
+                <circle cx="32" cy="32" r="31" fill="#26A17B"/>
+                <path d="M13 17h38v8H38v7.2c9.4.7 16.4 2.6 16.4 5.1 0 2.8-9.2 5.2-22.4 5.2S9.6 40.1 9.6 37.3c0-2.5 7-4.4 16.4-5.1V25H13v-8zm13 15.7c-8.4.5-14 1.7-14 3.1 0 1.7 9 3.1 20 3.1s20-1.4 20-3.1c0-1.4-5.6-2.6-14-3.1v8.8h-12v-8.8z" fill="#fff"/>
             </svg>
         </div>
         TetherFlow
     </div>
 
     <div class="header-right">
-        <div class="balance-mini">
-            Rate: <b id="headerRate">₹5 / USDT</b>
-        </div>
-
         <button class="menu-btn" onclick="openMenu()">☰</button>
     </div>
 </header>
@@ -898,7 +889,7 @@ footer{
                     <label>You Receive</label>
 
                     <div class="input-wrap">
-                        <span>₮</span>
+                        <span><svg class="usdt-logo" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="31" fill="#26A17B"/><path d="M13 17h38v8H38v7.2c9.4.7 16.4 2.6 16.4 5.1 0 2.8-9.2 5.2-22.4 5.2S9.6 40.1 9.6 37.3c0-2.5 7-4.4 16.4-5.1V25H13v-8zm13 15.7c-8.4.5-14 1.7-14 3.1 0 1.7 9 3.1 20 3.1s20-1.4 20-3.1c0-1.4-5.6-2.6-14-3.1v8.8h-12v-8.8z" fill="#fff"/></svg></span>
                         <input
                             id="usdtAmount"
                             type="text"
@@ -997,7 +988,7 @@ footer{
                         class="payment"
                         onclick="selectPayment(this,'CRYPTO')"
                     >
-                        ₮ Crypto
+                        <svg class="usdt-logo sm" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="31" fill="#26A17B"/><path d="M13 17h38v8H38v7.2c9.4.7 16.4 2.6 16.4 5.1 0 2.8-9.2 5.2-22.4 5.2S9.6 40.1 9.6 37.3c0-2.5 7-4.4 16.4-5.1V25H13v-8zm13 15.7c-8.4.5-14 1.7-14 3.1 0 1.7 9 3.1 20 3.1s20-1.4 20-3.1c0-1.4-5.6-2.6-14-3.1v8.8h-12v-8.8z" fill="#fff"/></svg> Crypto
                     </button>
 
                 </div>
@@ -1231,7 +1222,7 @@ footer{
             </div>
 
             <div class="summary-row">
-                <span>USDT</span>
+                <span><svg class="usdt-logo sm" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="31" fill="#26A17B"/><path d="M13 17h38v8H38v7.2c9.4.7 16.4 2.6 16.4 5.1 0 2.8-9.2 5.2-22.4 5.2S9.6 40.1 9.6 37.3c0-2.5 7-4.4 16.4-5.1V25H13v-8zm13 15.7c-8.4.5-14 1.7-14 3.1 0 1.7 9 3.1 20 3.1s20-1.4 20-3.1c0-1.4-5.6-2.6-14-3.1v8.8h-12v-8.8z" fill="#fff"/></svg> USDT</span>
                 <strong id="summaryUSDT">0 USDT</strong>
             </div>
 
@@ -1337,11 +1328,6 @@ footer{
 ========================= */
 
 const USDT_RATE = 5;
-
-function syncRateDisplay(){
-    const headerRate = document.getElementById("headerRate");
-    if(headerRate) headerRate.innerText = `₹${USDT_RATE} / USDT`;
-}
 
 
 /* =========================
