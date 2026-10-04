@@ -430,6 +430,12 @@ input:focus,select:focus{
     box-shadow:0 0 30px rgba(0,255,136,.15);
 }
 
+.buy-btn:disabled{
+    opacity:.45;
+    cursor:not-allowed;
+    filter:grayscale(.4);
+}
+
 .buy-btn:hover{
     background:#37ff9f;
     transform:translateY(-1px);
@@ -876,7 +882,7 @@ footer{
                         <input
                             id="inrAmount"
                             type="number"
-                            min="100"
+                            min="1000"
                             value="1000"
                             oninput="calculateUSDT()"
                         >
@@ -995,7 +1001,7 @@ footer{
 
             </div>
 
-            <button class="buy-btn" onclick="startOrder()">
+            <button class="buy-btn" id="buyBtn" onclick="startOrder()">
                 Continue → Buy USDT
             </button>
 
@@ -1395,6 +1401,11 @@ function calculateUSDT(){
 
     document.getElementById("receiveText").innerText =
         "$ " + usdt.toFixed(2) + " USDT";
+
+    const buyBtn = document.getElementById("buyBtn");
+    if(buyBtn){
+        buyBtn.disabled = inr < 1000;
+    }
 }
 
 
@@ -1837,9 +1848,9 @@ function startOrder(){
             .value
             .trim();
 
-    if(!amount || amount < 100){
+    if(!amount || amount < 1000){
 
-        showToast("Minimum amount is ₹100");
+        showToast("Minimum buy amount is ₹1000");
         return;
     }
 
