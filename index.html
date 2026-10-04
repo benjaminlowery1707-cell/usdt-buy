@@ -1005,7 +1005,6 @@ body:after{
       </div>
 
 
-      <!-- DYNAMIC AMOUNT LABEL -->
       <label
         class="label"
         id="amountLabel"
@@ -1470,7 +1469,19 @@ body:after{
    CONFIG
 ========================= */
 
+/*
+ * UPI:
+ * 1 USDT = ₹5
+ *
+ * USDT PAYMENT:
+ * 1 USDT = $20
+ *
+ * Therefore:
+ * 10 USDT = $200
+ */
+
 const USDT_RATE = 5;
+const USDT_USD_RATE = 20;
 
 let selectedNetwork = "TRC20";
 let selectedPayment = "UPI";
@@ -1635,7 +1646,9 @@ function updateAmountMode(){
 
   if(selectedPayment === "Crypto"){
 
-    /* USDT MODE */
+    /* =========================
+       USDT PAYMENT MODE
+    ========================= */
 
     label.textContent =
       "Enter amount (USDT)";
@@ -1647,14 +1660,15 @@ function updateAmountMode(){
       "10";
 
     receiveLabel.textContent =
-      "You pay";
+      "You receive";
 
-    document.getElementById("receive").textContent =
-      "0 USDT";
+    calculateUSDT();
 
   }else{
 
-    /* INR MODE */
+    /* =========================
+       UPI PAYMENT MODE
+    ========================= */
 
     label.textContent =
       "Enter amount (INR)";
@@ -1693,17 +1707,27 @@ function calculateUSDT(){
 
   if(selectedPayment === "Crypto"){
 
-    /* User enters USDT */
+    /*
+     * USDT PAYMENT:
+     * 10 USDT = $200
+     * 1 USDT = $20
+     */
+
+    const usdValue =
+      amount * USDT_USD_RATE;
 
     receive.textContent =
-      amount.toFixed(2) + " USDT";
+      "$" + usdValue.toFixed(2);
 
     return;
 
   }
 
 
-  /* User enters INR */
+  /*
+   * UPI PAYMENT:
+   * INR / ₹5 = USDT
+   */
 
   const usdt =
     amount / USDT_RATE;
@@ -1748,12 +1772,6 @@ function selectPayment(button,payment){
     });
 
   button.classList.add("active");
-
-
-  /*
-   * Change amount field
-   * between INR and USDT
-   */
 
   updateAmountMode();
 
@@ -1914,24 +1932,27 @@ function checkout(){
   }
 
 
-  /*
-   * Calculate actual USDT
-   */
-
-  let usdtAmount;
+  let receiveValue;
   let displayAmount;
 
 
   if(selectedPayment === "Crypto"){
 
-    /* User entered USDT directly */
+    /*
+     * User pays 10 USDT
+     * User receives $200
+     */
 
-    usdtAmount =
-      amount;
+    const usdValue =
+      amount * USDT_USD_RATE;
 
     displayAmount =
       amount.toFixed(2) +
       " USDT";
+
+    receiveValue =
+      "$" +
+      usdValue.toFixed(2);
 
     document
       .getElementById("checkoutAmountLabel")
@@ -1940,14 +1961,21 @@ function checkout(){
 
   }else{
 
-    /* User entered INR */
+    /*
+     * User pays INR
+     * User receives USDT
+     */
 
-    usdtAmount =
+    const usdtAmount =
       amount / USDT_RATE;
 
     displayAmount =
       "₹" +
       amount.toFixed(2);
+
+    receiveValue =
+      usdtAmount.toFixed(2) +
+      " USDT";
 
     document
       .getElementById("checkoutAmountLabel")
@@ -1966,8 +1994,7 @@ function checkout(){
   document
     .getElementById("checkoutUSDT")
     .textContent =
-    usdtAmount.toFixed(2) +
-    " USDT";
+    receiveValue;
 
 
   document
@@ -2020,11 +2047,15 @@ function placeOrder(){
 
   let usdtAmount;
   let inrAmount;
+  let usdValue = 0;
 
 
   if(selectedPayment === "Crypto"){
 
-    /* Amount entered directly in USDT */
+    /*
+     * User pays USDT
+     * 1 USDT = $20
+     */
 
     usdtAmount =
       amount;
@@ -2032,15 +2063,24 @@ function placeOrder(){
     inrAmount =
       amount * USDT_RATE;
 
+    usdValue =
+      amount * USDT_USD_RATE;
+
   }else{
 
-    /* Amount entered in INR */
+    /*
+     * User pays INR
+     * 1 USDT = ₹5
+     */
 
     inrAmount =
       amount;
 
     usdtAmount =
       amount / USDT_RATE;
+
+    usdValue =
+      usdtAmount * USDT_USD_RATE;
 
   }
 
@@ -2065,6 +2105,9 @@ function placeOrder(){
 
     usdt:
       usdtAmount.toFixed(2),
+
+    usdValue:
+      usdValue.toFixed(2),
 
     network:
       selectedNetwork,
@@ -2334,6 +2377,24 @@ function renderOrders(){
       "order";
 
 
+    let receiveLine = "";
+
+    if(order.payment === "USDT"){
+
+      receiveLine =
+        "You receive: $" +
+        Number(order.usdValue || 0).toFixed(2);
+
+    }else{
+
+      receiveLine =
+        "USDT: " +
+        order.usdt +
+        " USDT";
+
+    }
+
+
     div.innerHTML =
 
       "<strong>" +
@@ -2346,15 +2407,18 @@ function renderOrders(){
 
       "<br><br>" +
 
-      "Amount: ₹" +
-      Number(order.amount).toFixed(2) +
+      (
+        order.payment === "USDT"
+        ? "Paid: " +
+          Number(order.enteredAmount).toFixed(2) +
+          " USDT"
+        : "Amount: ₹" +
+          Number(order.amount).toFixed(2)
+      ) +
 
       "<br>" +
 
-      "USDT: " +
-      order.usdt +
-
-      " USDT" +
+      receiveLine +
 
       "<br>" +
 
@@ -2426,7 +2490,7 @@ document
    INITIALIZE
 ========================= */
 
-calculateUSDT();
+updateAmountMode();
 updateAccount();
 
 </script>
